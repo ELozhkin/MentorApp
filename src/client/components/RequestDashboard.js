@@ -76,7 +76,7 @@ class RequestDashboard extends Component {
 
         return (
             <div className="RequestDashboard">
-                <h1>test</h1>
+                
                 <div className="DashboardIcons">
                     <div className="icon1"></div>
                     <div className="icon2"></div>

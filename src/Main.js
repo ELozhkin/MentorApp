@@ -13,7 +13,7 @@ class Main extends Component {
                 
                 <Switch>
                     <Route exact path='/' component={Hello} />
-                    <Route path='/dashboard' component={RequestDashboard} />
+                    <Route path='/openRequests' component={RequestDashboard} />
                 </Switch>
                 
                 {/*<RequestDashboard />

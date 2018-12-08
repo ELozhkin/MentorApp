@@ -1,3 +1,9 @@
+
+Tutorials I followed:
+https://medium.com/@pshrmn/a-simple-react-router-v4-tutorial-7f23ff27adf (react-router)
+
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts

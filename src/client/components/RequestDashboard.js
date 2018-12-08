@@ -77,11 +77,11 @@ class RequestDashboard extends Component {
         return (
             <div className="RequestDashboard">
                 
-                <div className="DashboardIcons">
+                {/*<div className="DashboardIcons">
                     <div className="icon1"></div>
                     <div className="icon2"></div>
                     
-                </div>
+                </div>*/}
                 <hr />
                 <h3>Requests</h3>
                 <hr/>

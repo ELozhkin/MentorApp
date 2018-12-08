@@ -39,21 +39,13 @@ class RequestDashboard extends Component {
                     accessor: "issue",
 
                 },
-                {
+            {/*{
                     Header: "Name",
                     id: "name",
                     accessor: d => d.name
                 },
-            
-                {
-                    Header: "Location",
-                    accessor: "location",
-                    Cell: props => <span className='number'>{props.value}</span>
-                },
-                {
-                    Header: "Time",
-                    accessor: "moreInfo.time" //depends on how we want to structure data (i.e. nested?)
-                }
+            */}
+                
         ]
         const sub_columns = [
             {
@@ -63,13 +55,13 @@ class RequestDashboard extends Component {
             },
         ]
         //const sub_columns = [
-        sub_columns.push(
+        {/*sub_columns.push(
             {
                 id: 'button',
                 accessor: 'name',
                 Cell: ({ value }) => (<a onClick={console.log('clicked value', value)}>Help</a>)
             }
-        )
+        )*/}
         
         //]
 
@@ -95,6 +87,7 @@ class RequestDashboard extends Component {
                     SubComponent={(row) => {
                         return (
                             <div>
+                                <p>test</p>
                                 <ReactTable
                                     data={data}
                                     columns={sub_columns}

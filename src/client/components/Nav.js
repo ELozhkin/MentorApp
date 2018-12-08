@@ -9,10 +9,10 @@ class Nav extends Component {
                 <h1>SH logo</h1>
                 <ul>
                     <li>
-                        <Link to='/dashboard'>Dashboard</Link>
+                        <Link to='/'>In progress</Link>
                     </li>
                     <li>
-                        <Link to='/'>Home</Link>
+                        <Link to='/openRequests'>Open</Link>
                     </li>
                 </ul>
             </header>

@@ -9,7 +9,8 @@
 /*------------ Request Dashboard -------------------*/
 .rt-th, .rt-td{
     display:inline-block;
-    background-color:lightgrey;
+    /*background-color:lightgrey;*/
+    width:80% !important;
 }
 .rt-th {
     background-color:darkgrey;

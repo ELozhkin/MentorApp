@@ -2,6 +2,13 @@
 Tutorials I followed:
 https://medium.com/@pshrmn/a-simple-react-router-v4-tutorial-7f23ff27adf (react-router)
 
+Project was initially created with Create React App and built off of the initial structure.
+
+Main entry is App.js which has two components - nav and main. Nav is used by react-route in the mentor view 
+to switch between the different request dashboards. Main contains the other components used (i.e. RequestDashboard, 
+open requests)
+
+
 
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

@@ -6,6 +6,7 @@ class Nav extends Component {
     render() {
         return (
             <header>
+                <h1>SH logo</h1>
                 <ul>
                     <li>
                         <Link to='/'>In progress</Link>

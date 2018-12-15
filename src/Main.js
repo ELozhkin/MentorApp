@@ -6,6 +6,7 @@ import Hello from './client/components/hello';
 import Nav from './client/components/Nav';
 import RequestDashboard from './client/components/RequestDashboard';
 import MakeRequest from './client/components/MakeRequest';
+import MyTickets from './client/components/MyTickets';
 
 class Main extends Component {
     render() {
@@ -13,7 +14,7 @@ class Main extends Component {
             <div >
                 
                 <Switch>
-                    <Route exact path='/' component={Hello} />
+                    <Route exact path='/' component={MyTickets} />
                     <Route path='/openRequests' component={RequestDashboard} />
                     {/*<Route path='/makeRequest' component={MakeRequest}/>*/}
                 </Switch>

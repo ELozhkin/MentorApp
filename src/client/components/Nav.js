@@ -6,13 +6,14 @@ class Nav extends Component {
     render() {
         return (
             <header>
-                <h1>SH logo</h1>
-                <ul>
-                    <li>
-                        <Link to='/'>In progress</Link>
-                    </li>
+                <h3>SH logo</h3>
+                <hr/>
+                <ul class="mentorNav">
                     <li>
                         <Link to='/openRequests'>Open</Link>
+                    </li>
+                    <li>
+                        <Link to='/'>My Tickets</Link>
                     </li>
                 </ul>
             </header>

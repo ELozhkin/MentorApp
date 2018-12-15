@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import ReactTable, { ReactTableDefaults } from 'react-table';
+import BootstrapTable from 'react-bootstrap-table-next';
+
+
 
 class RequestDashboard extends Component {
     //constructor(props) {
@@ -35,7 +38,6 @@ class RequestDashboard extends Component {
             }]
         const columns = [
                {
-                    Header: "Issue",
                     accessor: "issue",
 
                 },
@@ -65,19 +67,18 @@ class RequestDashboard extends Component {
         
         //]
 
-
+      
         return (
             <div className="RequestDashboard">
-                
+
                 {/*<div className="DashboardIcons">
                     <div className="icon1"></div>
                     <div className="icon2"></div>
                     
                 </div>*/}
                 <hr />
-                <p>test</p>
                 <h3>Requests</h3>
-                <hr/>
+                <hr />
                 <ReactTable
                     data={data}
                     resolveData={data => data.map(row => row)}
@@ -88,20 +89,22 @@ class RequestDashboard extends Component {
                     SubComponent={(row) => {
                         return (
                             <div>
-                                <p>test</p>
                                 <ReactTable
                                     data={data}
                                     columns={sub_columns}
                                     showPagination={false}
                                     pageSize={3}
+                                    className = "ExpandRow"
                                 />
                             </div>)
                     }}
-                 />
-               
+                />
+
             </div>
            
         );
     }
 }
 export default RequestDashboard;
+
+

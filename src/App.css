@@ -1,5 +1,6 @@
 .App {
-    padding:10px;
+    padding:3%;
+    
 }
 .test {
     background-color: blue;
@@ -7,10 +8,19 @@
     display: block;
 }
 /*------------ Request Dashboard -------------------*/
-.rt-th, .rt-td{
+.mentorNav li{
     display:inline-block;
+    width:50%;
+    color:black !important;
+}
+.mentorNav a {
+    color:black;
+    text-decoration:none;
+}
+.rt-th, .rt-td {
+    display: inline-block;
     /*background-color:lightgrey;*/
-    width:80% !important;
+    width: 80% !important;
 }
 .rt-th {
     background-color:darkgrey;
@@ -38,32 +48,18 @@
     display:inline-block;
 }
 
-
-/*.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
+/*------------ Table --------------*/
+.ExpandRow {
+    background-color:red;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+
+/*------------------MyTickets---------*/
+.nothingYet {
+    text-align: center;
+    margin: auto;
+    margin-top: 100px;
+    width: 60%;
 }
 
-.App-link {
-  color: #61dafb;
-}
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}*/

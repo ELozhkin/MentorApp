@@ -75,6 +75,7 @@ class RequestDashboard extends Component {
                     
                 </div>*/}
                 <hr />
+                <p>test</p>
                 <h3>Requests</h3>
                 <hr/>
                 <ReactTable

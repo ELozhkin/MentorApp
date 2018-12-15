@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
+//import { View, List, FlatList } from 'react-native';
 
 import './App.css';
 import Hello from './client/components/hello';

@@ -1,5 +1,6 @@
 .App {
-    padding:3%;
+    padding:2%;
+    
     
 }
 .test {
@@ -47,10 +48,15 @@
     height:50px;
     display:inline-block;
 }
-
+.RequestTitle h3 {
+    display: inline-block;
+    justify-content:space-around;   
+}
 /*------------ Table --------------*/
 .ExpandRow {
-    background-color:red;
+    background-color: lightgray;
+    border-radius:5%;
+    padding:2%;
 }
 
 

@@ -5,16 +5,7 @@ import BootstrapTable from 'react-bootstrap-table-next';
 
 
 class RequestDashboard extends Component {
-    //constructor(props) {
-    //    super(props);
-    //    this.state = {
-    //        data: getData()
-    //    };
-    //}
 
-    //getData() {
-    //    this.state.testObj = fetch('');
-    //};
     render() {  
         const data = [{
             issue: 'Help Java',
@@ -51,9 +42,14 @@ class RequestDashboard extends Component {
         ]
         const sub_columns = [
             {
-                Header: "Description",
+                Header: "",
                 id: "description",
-                accessor: d => d.description
+                accessor: d => d.description,
+                Cell: ({ value }) => (
+                    <a onClick={console.log('clicked value')}>Help</a>,
+                    <p>test</p>,
+                    <p>test2</p>
+                )
             },
         ]
         //const sub_columns = [
@@ -71,14 +67,14 @@ class RequestDashboard extends Component {
         return (
             <div className="RequestDashboard">
 
-                {/*<div className="DashboardIcons">
-                    <div className="icon1"></div>
-                    <div className="icon2"></div>
-                    
-                </div>*/}
+             
                 <hr />
-                <h3>Requests</h3>
-                <hr />
+                <div class="RequestTitle">
+                    <h3>Requests</h3>
+                    <h3>test</h3>
+
+                </div>
+                
                 <ReactTable
                     data={data}
                     resolveData={data => data.map(row => row)}
@@ -94,7 +90,9 @@ class RequestDashboard extends Component {
                                     columns={sub_columns}
                                     showPagination={false}
                                     pageSize={3}
-                                    className = "ExpandRow"
+                                    className="ExpandRow"
+                                    loadingText={" "}
+
                                 />
                             </div>)
                     }}

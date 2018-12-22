@@ -14,7 +14,7 @@ class Main extends Component {
             <div >
                 
                 <Switch>
-                    <Route exact path='/' component={MyTickets} />
+                    <Route exact path='/myTickets' component={MyTickets} />
                     <Route path='/openRequests' component={RequestDashboard} />
                     {/*<Route path='/makeRequest' component={MakeRequest}/>*/}
                 </Switch>

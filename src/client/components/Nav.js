@@ -13,7 +13,7 @@ class Nav extends Component {
                         <Link to='/openRequests'>Open</Link>
                     </li>
                     <li>
-                        <Link to='/'>My Tickets</Link>
+                        <Link to='/myTickets'>My Tickets</Link>
                     </li>
                 </ul>
             </header>

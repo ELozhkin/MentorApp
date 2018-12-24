@@ -10,14 +10,22 @@ var store = {
 
 let data = [
     {
-        id: "Python Help",
-        name: "John Doe",
+        hacker_name: "John Doe",
+        problem_name: "Python Help",        
+        description: "something extra",
+        location: "QNC 1234",
+        time_created: {
+            now: "12:01pm",
+            default: "Date.now"
+        },
+        hacker_slack_name: "@hackerslack",
         date: "December 23",
         time: "12:01pm",
+        notes: "wearing a bright red hoodie",
         email: "test@uwaterloo.ca",
-        location: "QNC 1234",
+        
         slack: "@test",
-        details: "wearing a bright red hoodie",
+        
         state: "live"
     },
     {
@@ -93,9 +101,9 @@ class RowItem extends React.Component {
             <li onClick={this.toggleRow.bind(this)} className={classes}>
                 <div className="heading">
                     <div className="col">
-                        {this.props.id}
+                        {this.props.problem_name}
                         <br />
-                        
+
                         {this.props.date}
                         {this.props.time}
                         
@@ -106,11 +114,12 @@ class RowItem extends React.Component {
                 </div>
                 <RowContent
                     open={this.state.open}
-                    name={this.props.name}
+                    name={this.props.hacker_name}
                     email={this.props.email}
                     location={this.props.location}
-                    slack={this.props.slack}
+                    slack={this.props.hacker_slack_name}
                     details={this.props.details}
+                    notes={this.props.notes}
                 />
                 {this.props.children}
             </li>
@@ -139,11 +148,11 @@ class Form extends React.Component {
             <form onSubmit={this.handleSubmit} className="claimForm">
                 <label htmlFor="username">Name</label>
                 <br/>
-                <input id="username" name="username" type="text" />
+                <input id="mentor.identifier.name" name="username" type="text" />
                 <br/>
                 <label htmlFor="email">Slack Handle</label>
                 <br/>
-                <input id="email" name="email" type="email" />
+                <input id="mentor.identifier.slack" name="mentor.slack" type="text" />
                 <br />
                 <button>Claim</button>
             </form>
@@ -181,7 +190,7 @@ class RowContent extends React.Component {
                         </ul>
                     </div>
                     <div className=" extraDetails">
-                        <p>{this.props.details}</p>
+                        <p>{this.props.notes}</p>
                         <hr />
                         <Form/>
                     </div>

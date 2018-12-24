@@ -17,7 +17,7 @@ let data = [
         email: "test@uwaterloo.ca",
         location: "QNC 1234",
         slack: "@test",
-        details: "details 0",
+        details: "wearing a bright red hoodie",
         state: "live"
     },
     {
@@ -115,7 +115,39 @@ class RowItem extends React.Component {
     }
 
 };
+class Form extends React.Component {
+    constructor(){
+        super();
+        this.handleSubmit = this.handleSubmit.bind(this);
+    }
+    handleSubmit(event) {
+        event.preventDefault();
+        const data = new FormData(event.target);
+        fetch('/api/url', {
+            method: 'POST',
+            body: data
+        });
+    }
 
+    render() {
+        return (
+            <form onSubmit={this.handleSubmit}>
+                <label htmlFor="username">Name</label>
+                <br/>
+                <input id="username" name="username" type="text" />
+                <br/>
+                <label htmlFor="email">Slack Handle</label>
+                <br/>
+                <input id="email" name="email" type="email" />
+                <br/>
+                <button>Claim</button>
+
+            </form>
+        );
+    }
+
+
+}
 {/*RowContent is the content within the collapsible section of the request dashboard
     i.e. shows additional info 
  */}
@@ -134,16 +166,22 @@ class RowContent extends React.Component {
         if (this.props.open) {
             console.log(this.props.details);
             jsxhtml = (
-                <div className="content open extraInfo" onClick={this.clicker.bind(this)}>
-                    <ul>
+                <div className="content open" onClick={this.clicker.bind(this)}>
+                    <ul className="extraInfo">
                         <li>{this.props.name}</li>
                         <li>{this.props.email}</li>
                     </ul>
-                    <ul>
+                    <ul className="extraInfo">
                         <li>{this.props.location}</li>
                         <li>{this.props.slack}</li>
                     </ul>
-                    {this.props.details}
+                    <div className="extraInfo extraDetails">
+                        <p>{this.props.details}</p>
+                        <hr />
+                        <Form/>
+                    </div>
+                    
+                    
                     {this.props.children}
                 </div>
                 );

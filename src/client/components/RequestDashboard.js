@@ -136,7 +136,7 @@ class Form extends React.Component {
 
     render() {
         return (
-            <form onSubmit={this.handleSubmit}>
+            <form onSubmit={this.handleSubmit} className="claimForm">
                 <label htmlFor="username">Name</label>
                 <br/>
                 <input id="username" name="username" type="text" />
@@ -144,7 +144,7 @@ class Form extends React.Component {
                 <label htmlFor="email">Slack Handle</label>
                 <br/>
                 <input id="email" name="email" type="email" />
-                <br/>
+                <br />
                 <button>Claim</button>
             </form>
         );

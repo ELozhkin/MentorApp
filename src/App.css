@@ -166,10 +166,36 @@
 }
 
 .table ul li.open .content {
-    height: 400px;
+    height: 300px;
     opacity: 1;
     position:relative;
 }
 
 
+/*=====claim form in request dashboard=======*/
+.claimForm input {
+    width:97%;
+    background:#ffffff;
+    border:none;
+    height:25px;
+}
+.claimForm label {
+    font-family:Lato;
+    font-style:normal;
+    font-weight:normal;
+    font-size:15px;
+    color:#000000;
+    height:18px;
+    line-height:23px;
+    left:27px;
+}
 
+.claimForm button {
+    width:162px;
+    height:52px;
+    margin-left:176px;
+    margin-top:20px;
+    border:none;
+    border-radius:205px;
+    background-color:darkgrey;
+}

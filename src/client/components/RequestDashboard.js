@@ -95,8 +95,11 @@ class RowItem extends React.Component {
                     <div className="col">
                         {this.props.id}
                         <br />
+                        
                         {this.props.date}
                         {this.props.time}
+                        
+                        
                         <br />
                         skill 
                     </div>
@@ -115,6 +118,8 @@ class RowItem extends React.Component {
     }
 
 };
+
+{/*Form handles submission form for mentors to claim a request.*/}
 class Form extends React.Component {
     constructor(){
         super();
@@ -141,7 +146,6 @@ class Form extends React.Component {
                 <input id="email" name="email" type="email" />
                 <br/>
                 <button>Claim</button>
-
             </form>
         );
     }
@@ -160,22 +164,23 @@ class RowContent extends React.Component {
             <div className="content" onClick={this.clicker.bind(this)}>
                 row content
                 {this.props.children}
-
             </div>);
 
         if (this.props.open) {
             console.log(this.props.details);
             jsxhtml = (
                 <div className="content open" onClick={this.clicker.bind(this)}>
-                    <ul className="extraInfo">
-                        <li>{this.props.name}</li>
-                        <li>{this.props.email}</li>
-                    </ul>
-                    <ul className="extraInfo">
-                        <li>{this.props.location}</li>
-                        <li>{this.props.slack}</li>
-                    </ul>
-                    <div className="extraInfo extraDetails">
+                    <div className="extraInfo">
+                        <ul className="extraInfo">
+                            <li>{this.props.name}</li>
+                            <li>{this.props.email}</li>
+                        </ul>
+                        <ul className="extraInfo">
+                            <li>{this.props.location}</li>
+                            <li>{this.props.slack}</li>
+                        </ul>
+                    </div>
+                    <div className=" extraDetails">
                         <p>{this.props.details}</p>
                         <hr />
                         <Form/>

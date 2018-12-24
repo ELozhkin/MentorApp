@@ -1,5 +1,6 @@
 .App {
-    padding:2%;
+    padding: 2%;
+    font-family: Lato;
 }
 .test {
     background-color: blue;
@@ -191,11 +192,31 @@
 }
 
 .claimForm button {
-    width:162px;
-    height:52px;
-    margin-left:176px;
-    margin-top:20px;
-    border:none;
-    border-radius:205px;
-    background-color:darkgrey;
+    width: 162px;
+    height: 52px;
+    margin-left: 176px;
+    margin-top: 20px;
+    border: none;
+    border-radius: 205px;
+    background-color: #C4C4C4;
+}
+/*----------- MY REQUESTS ------------*/
+.claimedRequests button {
+    width: 95%;
+    height: 52px;
+    margin: 10px auto;
+    border: none;
+    border-radius: 50px;
+    box-sizing: border-box;
+    background-color: #e5e8eb;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    font-size: 16px;
+    text-align: center;
+    border: 1.5px solid rgba(0, 0, 0, 0.2);
+    color: #35383F;
+}
+.claimedRequests .resolveButton {
+    background-color: #D1D1D1;
 }

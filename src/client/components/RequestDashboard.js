@@ -10,8 +10,13 @@ var store = {
 
 let data = [
     {
-        id: 0,
-        name: "name 0",
+        id: "Python Help",
+        name: "John Doe",
+        date: "December 23",
+        time: "12:01pm",
+        email: "test@uwaterloo.ca",
+        location: "QNC 1234",
+        slack: "@test",
         details: "details 0",
         state: "live"
     },
@@ -50,52 +55,22 @@ let data = [
         name: "name 6",
         details: "details 6",
         state: "live"
-    },
-    {
-        id: 7,
-        name: "name 7",
-        details: "details 7",
-        state: "live"
-    },
-    {
-        id: 8,
-        name: "name 8",
-        details: "details 8",
-        state: "live"
-    },
-    {
-        id: 9,
-        name: "name 9",
-        details: "details 9",
-        state: "live"
-    },
-    {
-        id: 10,
-        name: "name 10",
-        details: "details 10",
-        state: "live"
     }
 ];
 
 let cols = [
     {
-        icon: "",
-        label: "Order Number"
-    },
-    {/*{
-        icon: "",
-        label: "Name"
-    },
-    {
-        icon: "",
-        label: "Details"
-    },
-    {
-        icon: "",
-        label: "State"
-    }*/}
+        label: "Requests"
+    }
 ];
 
+{/*RowItem class is refers to each row entry that is visible before drop-down 
+ * in the request dashboard.
+    
+    TODO:
+    Fix display within return section.
+    add buttons for skills 
+ */}
 class RowItem extends React.Component {
     constructor() {
         super();
@@ -117,12 +92,23 @@ class RowItem extends React.Component {
         return (
             <li onClick={this.toggleRow.bind(this)} className={classes}>
                 <div className="heading">
-                    <div className="col"> {this.props.id}</div>
-                    {/*<div className="col"> {this.props.name}</div>
-                    <div className="col"> {this.props.details}</div>
-                    <div className="col"> {this.props.state}</div>*/}
+                    <div className="col">
+                        {this.props.id}
+                        <br />
+                        {this.props.date}
+                        {this.props.time}
+                        <br />
+                        skill 
+                    </div>
                 </div>
-                <RowContent open={this.state.open} />
+                <RowContent
+                    open={this.state.open}
+                    name={this.props.name}
+                    email={this.props.email}
+                    location={this.props.location}
+                    slack={this.props.slack}
+                    details={this.props.details}
+                />
                 {this.props.children}
             </li>
          )
@@ -130,37 +116,50 @@ class RowItem extends React.Component {
 
 };
 
+{/*RowContent is the content within the collapsible section of the request dashboard
+    i.e. shows additional info 
+ */}
 class RowContent extends React.Component {
     clicker() {
-
     }
 
     render() {
         let jsxhtml = (
             <div className="content" onClick={this.clicker.bind(this)}>
                 row content
-                <br/>
-                test
                 {this.props.children}
 
             </div>);
 
         if (this.props.open) {
-            jsxhtml = (<div className="content open" onClick={this.clicker.bind(this)}>
-                row content
-            {this.props.children}
-            </div>
+            console.log(this.props.details);
+            jsxhtml = (
+                <div className="content open extraInfo" onClick={this.clicker.bind(this)}>
+                    <ul>
+                        <li>{this.props.name}</li>
+                        <li>{this.props.email}</li>
+                    </ul>
+                    <ul>
+                        <li>{this.props.location}</li>
+                        <li>{this.props.slack}</li>
+                    </ul>
+                    {this.props.details}
+                    {this.props.children}
+                </div>
                 );
         }
 
         return (
             <div>
-                {jsxhtml}
+                {jsxhtml} 
             </div>
             )            
     }
 };
 
+{/*Table combines Row and RowContent to create the entire table
+    includes logic that toggles between open and !open
+ */}
 class Table extends React.Component {
     constructor() {
         super();
@@ -200,16 +199,21 @@ class Table extends React.Component {
     }
 
 }
+{/*Controls top header for the list - this part may not be included*/}
 class HeaderColumn extends Component {
     constructor() {
         super();
     }
     render() {
-        return (<div className="hcol">{this.props.label}</div>);
+        return (
+            <div className="hcol">
+                {this.props.label}
+            </div>
+        );
     }
 }
 
-
+{/*Combines everything - exported class*/}
 class RequestDashboard extends Component {
     constructor() {
         super();
@@ -243,8 +247,9 @@ class RequestDashboard extends Component {
 
         return (
             <div className="container">
-                {/*<div className="topbox">Top section..</div>*/}
-                <Table data={data}
+                
+                <Table
+                    data={data}
                     columns={cols}
                     headerFixed={this.state.tableHeaderFixed}
                     scrollFn='' />
@@ -253,7 +258,7 @@ class RequestDashboard extends Component {
     }
 };
 
-
+//--- OLD VERSION OF TABLE BELOW ---
 {/*class RequestDashboard extends Component {
 
     render() {  

@@ -1,7 +1,5 @@
 .App {
     padding:2%;
-    
-    
 }
 .test {
     background-color: blue;
@@ -17,14 +15,6 @@
 .mentorNav a {
     color:black;
     text-decoration:none;
-}
-.rt-th, .rt-td {
-    display: inline-block;
-    width: 80% !important;
-}
-.rt-th {
-    background-color:darkgrey;
-    width:30px;
 }
 
 .pagination-bottom {
@@ -50,11 +40,6 @@
     justify-content:space-around;   
 }
 /*------------ Table --------------*/
-/*.ExpandRow {
-    background-color: lightgray;
-    border-radius:5%;
-    padding:2%;
-}*/
 
 
 /*------------------MyTickets---------*/
@@ -68,12 +53,6 @@
 
 /*===================*/
 
-
-.topbox {
-    height: 60px;
-    margin:10px;
-    background: #c8e0ec;
-}
 .table {
     position: relative;
     width: 100%;
@@ -126,7 +105,7 @@
     padding: 0px;
     margin: 0px;
     position: absolute;
-    top: 32px;
+    /*top: 32px;*/
     width: 100%;
 }
 
@@ -134,6 +113,8 @@
     width: 100%;
     min-height: 83px;
     border-bottom: 1px solid #DFDFDF;
+    
+
 }
 .table ul li .heading {
     display: flex;
@@ -154,27 +135,34 @@
     height: 83px;
     border-right: 1px solid #DFDFDF;
 }
-
+.table ul.content{
+    top:300px !important;
+}
 
 .table ul li .content {
-    width: 10%;
+    width: 100%;
+    top:300px !important;
     height: 0px;
-    background-color:red;
     opacity: 0;
     transition: height 1s;
 }
-.table ul li .open .heading {
+.table ul li{
+    border-bottom:none !important;
+}
+.table ul li.open .heading {
     background: #4d98bc;
     color: #ffffff;
 }
-.table ul li .open .heading .col{
+.table ul li.open .heading .col{
     border:none;
 }
 .table ul li.open .content {
- 
-    height: 50px;
+    height: 300px;
     opacity: 1;
+}
 
+.table ul li.extraInfo{
+    margin-left:30px;
 }
 
 

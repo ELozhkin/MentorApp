@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import ReactDOM from 'react-dom';
 import ReactTable, { ReactTableDefaults } from 'react-table';
 import BootstrapTable from 'react-bootstrap-table-next';
@@ -11,7 +12,7 @@ var store = {
 let data = [
     {
         hacker_name: "John Doe",
-        problem_name: "Python Help",        
+        problem_name: "Python Help",
         description: "something extra",
         location: "QNC 1234",
         time_created: {
@@ -23,9 +24,9 @@ let data = [
         time: "12:01pm",
         notes: "wearing a bright red hoodie",
         email: "test@uwaterloo.ca",
-        
+
         slack: "@test",
-        
+
         state: "live"
     },
     {
@@ -68,7 +69,7 @@ let data = [
 
 let cols = [
     {
-        label: "Requests"
+        label: "My Claimed Requests"
     }
 ];
 
@@ -106,10 +107,10 @@ class RowItem extends React.Component {
 
                         {this.props.date}
                         {this.props.time}
-                        
-                        
+
+
                         <br />
-                        skill 
+                        skill
                     </div>
                 </div>
                 <RowContent
@@ -123,14 +124,14 @@ class RowItem extends React.Component {
                 />
                 {this.props.children}
             </li>
-         )
+        )
     }
 
 };
 
-{/*Form handles submission form for mentors to claim a request.*/}
+{/*Form handles submission form for mentors to claim a request.*/ }
 class Form extends React.Component {
-    constructor(){
+    constructor() {
         super();
         this.handleSubmit = this.handleSubmit.bind(this);
     }
@@ -145,16 +146,9 @@ class Form extends React.Component {
 
     render() {
         return (
-            <form onSubmit={this.handleSubmit} className="claimForm">
-                <label htmlFor="username">Name</label>
-                <br/>
-                <input id="mentor.identifier.name" name="username" type="text" />
-                <br/>
-                <label htmlFor="email">Slack Handle</label>
-                <br/>
-                <input id="mentor.identifier.slack" name="mentor.slack" type="text" />
-                <br />
-                <button>Claim</button>
+            <form onSubmit={this.handleSubmit} className="claimedRequests">
+                <button className="resolveButton">Yes! its Resolved</button>
+                <button>No - cancel claim</button>
             </form>
         );
     }
@@ -191,21 +185,22 @@ class RowContent extends React.Component {
                     </div>
                     <div className=" extraDetails">
                         <p>{this.props.notes}</p>
+                        <br/>
                         <hr />
-                        <Form/>
+                        <Form />
                     </div>
-                    
-                    
+
+
                     {this.props.children}
                 </div>
-                );
+            );
         }
 
         return (
             <div>
-                {jsxhtml} 
+                {jsxhtml}
             </div>
-            )            
+        )
     }
 };
 
@@ -217,7 +212,7 @@ class Table extends React.Component {
         super();
         this.state = {
             headerOffset: null,
-            headerFixed:true
+            headerFixed: true
         }
     }
 
@@ -251,7 +246,7 @@ class Table extends React.Component {
     }
 
 }
-{/*Controls top header for the list - this part may not be included*/}
+{/*Controls top header for the list - this part may not be included*/ }
 class HeaderColumn extends Component {
     constructor() {
         super();
@@ -264,9 +259,7 @@ class HeaderColumn extends Component {
         );
     }
 }
-
-{/*Combines everything - exported class*/}
-class RequestDashboard extends Component {
+class myTickets extends Component {
     constructor() {
         super();
         this.state = {
@@ -294,22 +287,43 @@ class RequestDashboard extends Component {
         console.log('app mounted');
         window.addEventListener('scroll', this.handleScroll.bind(this));
     }
-
     render() {
 
-        return (
+        let jsxhtml = (
+
             <div className="container">
-                
                 <Table
                     data={data}
                     columns={cols}
                     headerFixed={this.state.tableHeaderFixed}
                     scrollFn='' />
+
             </div>
+        )
+        {/* --------if mentor has not accepted any tickets yet ---- SET THIS AS DEFAULT
+         * 
+         * 
+         if (data.empty == true) {
+            console.log(data.empty);
+
+            jsxhtml = (
+                <div className="nothingYet">
+                    <p>Nothing yet!</p>
+                    <p>Requests that you claim will show up here.</p>
+                </div>
             )
+        }
+         */}
+        
+
+        return (
+
+            <div>
+                {jsxhtml}
+            </div>);
+
     }
 };
-
-export default RequestDashboard;
+export default myTickets;
 
 

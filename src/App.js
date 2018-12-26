@@ -1,21 +1,21 @@
-import React, { Component } from 'react';
-import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
+import React, { Component, ReactDOM } from 'react';
+import { Switch, Route } from 'react-router-dom';
 
 import './App.css';
 import Hello from './client/components/hello';
-import Nav from './client/components/Nav';
-import Main from './Main';
-import RequestDashboard from './client/components/RequestDashboard';
+import MentorMain from './M_Main';
+import HackerMain from './H_Main';
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-
-            <Nav/>
-            <Main/>
-            
-
+            <Switch>
+                <Route exact path='/' component={Hello} />
+                <Route path='/Mentor' component={MentorMain} />
+                <Route path='/Hacker' component={HackerMain}/>
+            </Switch>
+           
       </div>
     );
   }

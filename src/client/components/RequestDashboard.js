@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { Switch, Route } from 'react-router-dom';
+
 import ReactDOM from 'react-dom';
 import ReactTable, { ReactTableDefaults } from 'react-table';
 import BootstrapTable from 'react-bootstrap-table-next';

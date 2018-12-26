@@ -1,4 +1,3 @@
-// JavaScript source code
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
@@ -10,10 +9,10 @@ class Nav extends Component {
                 <hr/>
                 <ul class="mentorNav">
                     <li>
-                        <Link to='/openRequests'>Open</Link>
+                        <Link to='/Mentor/openRequests'>Open</Link>
                     </li>
                     <li>
-                        <Link to='/myTickets'>My Tickets</Link>
+                        <Link to='/Mentor/myTickets'>My Tickets</Link>
                     </li>
                 </ul>
             </header>

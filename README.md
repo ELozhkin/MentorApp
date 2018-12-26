@@ -4,9 +4,12 @@ https://medium.com/@pshrmn/a-simple-react-router-v4-tutorial-7f23ff27adf (react-
 
 Project was initially created with Create React App and built off of the initial structure.
 
-Main entry is App.js which has two components - nav and main. Nav is used by react-route in the mentor view 
-to switch between the different request dashboards. Main contains the other components used (i.e. RequestDashboard, 
-open requests)
+---updated to include both hacker and mentor views ---
+Main entry is App.js - has two components (hacker and mentor). 
+In MENTOR view; has two main components - nav and switcher. (Nav present  on all pages)
+Nav is used by react-route in the mentor view to switch between the different request dashboards.
+Main controls routing between the two pages.
+In HACKER view; also have two components - nav and switcher. Nav and Main are used similarly as in the Mentor view.
 
 
 

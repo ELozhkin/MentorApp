@@ -1,6 +1,7 @@
 
 Tutorials I followed:
 https://medium.com/@pshrmn/a-simple-react-router-v4-tutorial-7f23ff27adf (react-router)
+https://ui.reach.tech/dialog (Dialog - confirmation screen before submitting)
 
 Project was initially created with Create React App and built off of the initial structure.
 

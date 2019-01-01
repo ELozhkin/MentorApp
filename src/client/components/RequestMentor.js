@@ -1,5 +1,5 @@
 // JavaScript source code
-import React, { Component } from 'react';
+import React, { Component } from 'react';   
 import { Dialog } from '@reach/dialog';
 
 

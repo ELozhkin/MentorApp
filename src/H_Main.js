@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom';
 import RequestMentor from './client/components/RequestMentor';
+import RequestReview from './client/components/RequestReview';
 import Hello from './client/components/hello';
 
 class Switcher extends Component {
@@ -10,7 +11,7 @@ class Switcher extends Component {
             <Switch>
                 <Route exact path='/Hacker' component={Hello} />
                 <Route path='/Hacker/RequestMentor' component={RequestMentor} />
-                
+                <Route path='/Hacker/RequestReview' component={RequestReview}/>
             </Switch>
         </div>);
     }

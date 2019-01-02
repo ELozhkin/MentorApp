@@ -1,6 +1,7 @@
 // JavaScript source code
 import React, { Component } from 'react';   
 import { Dialog } from '@reach/dialog';
+import { Link } from 'react-router-dom';
 
 
 class ConfirmChange extends Component {
@@ -59,11 +60,12 @@ class RequestForm extends Component {
         this.state = {
             select: "open",
 
-            problem: "i.e. finding a bug in Java",
+            problem_name: "i.e. finding a bug in Java",
             skills: "Java",
             location: "i.e. building + room number"
         };
         this.handleChange = this.handleChange.bind(this);
+       
         this.toReview = this.toReview.bind(this);
 
         this.handleSubmit = () => alert("submitted");
@@ -73,24 +75,23 @@ class RequestForm extends Component {
                 select:event.target.value
             })
         }
-        this.handleReset = event => {
-            alert("Resetted");
-        }
+        
     }
     handleChange(event) {
         this.setState({
-            problem: event.target.value,
+            problem_name: event.target.value,
             skills:event.target.value
         });
+        
     }
     toReview(event) {
-        console.log("review");
+        alert(this.state.problem_name);
     }
     
     render() {
         return (
             <div>
-                <ConfirmChange title="Confirm" description="are you sure">
+                {/*  <ConfirmChange title="Confirm" description="are you sure">
                     {confirm => (
                         <form onSubmit={confirm(this.handleSubmit)}>
                             <label>
@@ -102,18 +103,17 @@ class RequestForm extends Component {
                                     <option value="close">Close</option>
                                 </select>
                             </label>
-                            <button type="reset" onClick={confirm(this.handleReset)}>Reset</button>
                             <button>Submit</button>
                         </form>
                         )}
-                </ConfirmChange>
+                </ConfirmChange>*/}
 
                 <form >
                     <h4>Describe your problem</h4>
                     <label for="problem_name">
                         Problem
                         <input type="text"
-                            value={this.state.problem}
+                            value={this.state.problem_name}
                             onChange={this.handleChange}
                         ></input>
                     </label>
@@ -156,7 +156,15 @@ class RequestForm extends Component {
                     </label>
                     
                     <br />
-                    
+                    <button onClick={this.toReview}>Submit</button>
+                    <Link to={{
+                        pathname: "/Hacker/RequestReview",
+                        search: "?sort=this.state.problem_name",
+                        state: {
+                            problem_name: this.state.problem_name,
+                            
+                        }
+                    }}>test</Link>
                 </form>
             </div>);
     }

@@ -1,9 +1,9 @@
 
-Tutorials I followed:
+Tutorials:
 https://medium.com/@pshrmn/a-simple-react-router-v4-tutorial-7f23ff27adf (react-router)
 https://ui.reach.tech/dialog (Dialog - confirmation screen before submitting)
 
-Project was initially created with Create React App and built off of the initial structure.
+reated with Create React App and built off of the initial structure.
 
 ---updated to include both hacker and mentor views ---
 Main entry is App.js - has two components (hacker and mentor). 

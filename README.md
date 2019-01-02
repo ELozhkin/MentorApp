@@ -1,19 +1,29 @@
 
-Tutorials I followed:
+Tutorials:
 https://medium.com/@pshrmn/a-simple-react-router-v4-tutorial-7f23ff27adf (react-router)
 https://ui.reach.tech/dialog (Dialog - confirmation screen before submitting)
 
-Project was initially created with Create React App and built off of the initial structure.
+Created with Create React App - built off of the initial structure.
 
----updated to include both hacker and mentor views ---
+--- hacker and mentor views ---
 Main entry is App.js - has two components (hacker and mentor). 
-In MENTOR view; has two main components - nav and switcher. (Nav present  on all pages)
+MENTOR view; has two main components - nav and switcher. (Nav present  on all pages)
 Nav is used by react-route in the mentor view to switch between the different request dashboards.
 Main controls routing between the two pages.
 In HACKER view; one component - switcher. Nav is a fixed header on the H_Main page
 and Switcher controls routing between views of the hacker view.
 
-
+TODO:
+- MENTOR: 
+		-- login with gmail/facebook
+		-- 'my tickets' - display only the tickets i've already claimed, if any
+- HACKER:
+		-- Request form - finish up api call (currently working on this)
+		-- confirmation before submission
+		-- email confirmation sent upon submission
+- BOTH: 
+		--fully integrate api calls/sync to backend
+		-- finalize UI
 
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

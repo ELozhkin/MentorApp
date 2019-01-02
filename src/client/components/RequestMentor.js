@@ -1,6 +1,7 @@
 // JavaScript source code
 import React, { Component } from 'react';   
 import { Dialog } from '@reach/dialog';
+import { Link } from 'react-router-dom';
 
 
 class ConfirmChange extends Component {
@@ -59,11 +60,16 @@ class RequestForm extends Component {
         this.state = {
             select: "open",
 
-            problem: "i.e. finding a bug in Java",
+            problem_name: "i.e. finding a bug in Java",
+            hacker_name:"",
             skills: "Java",
-            location: "i.e. building + room number"
+            location: "i.e. building + room number",
+            email: "",
+            hacker_identifier: ""
+
         };
         this.handleChange = this.handleChange.bind(this);
+       
         this.toReview = this.toReview.bind(this);
 
         this.handleSubmit = () => alert("submitted");
@@ -73,24 +79,22 @@ class RequestForm extends Component {
                 select:event.target.value
             })
         }
-        this.handleReset = event => {
-            alert("Resetted");
-        }
+        
     }
-    handleChange(event) {
+    handleChange(evt) {
         this.setState({
-            problem: event.target.value,
-            skills:event.target.value
+            [evt.target.name]: evt.target.value
         });
+        
     }
     toReview(event) {
-        console.log("review");
+        alert(this.state.problem_name);
     }
     
     render() {
         return (
             <div>
-                <ConfirmChange title="Confirm" description="are you sure">
+                {/*  <ConfirmChange title="Confirm" description="are you sure">
                     {confirm => (
                         <form onSubmit={confirm(this.handleSubmit)}>
                             <label>
@@ -102,19 +106,19 @@ class RequestForm extends Component {
                                     <option value="close">Close</option>
                                 </select>
                             </label>
-                            <button type="reset" onClick={confirm(this.handleReset)}>Reset</button>
                             <button>Submit</button>
                         </form>
                         )}
-                </ConfirmChange>
+                </ConfirmChange>*/}
 
                 <form >
                     <h4>Describe your problem</h4>
                     <label for="problem_name">
                         Problem
                         <input type="text"
-                            value={this.state.problem}
+                            value={this.state.problem_name}
                             onChange={this.handleChange}
+                            name="problem_name"
                         ></input>
                     </label>
                     <br />
@@ -128,7 +132,10 @@ class RequestForm extends Component {
                     <h4>Hacker Info</h4>
                     <label for="hacker_name">
                         Name
-                        <input type="text" id="hacker_name"></input>
+                        <input type="text"
+                            value={this.state.hacker_name}
+                            onChange={this.handleChange}
+                            name="hacker_name"></input>
                     </label>
                     
                     <br />
@@ -156,7 +163,18 @@ class RequestForm extends Component {
                     </label>
                     
                     <br />
-                    
+                    <button onClick={this.toReview}>Submit</button>
+                    <Link to={{
+                        pathname: "/Hacker/RequestReview",
+                        search: "?sort=this.state.problem_name",
+                        state: {
+                            problem_name: this.state.problem_name,
+                            hacker_name: this.state.hacker_name,
+                            email: this.state.email,
+                            location: this.state.location,
+                            hacker_identifier: this.state.hacker_identifier
+                        }
+                    }}>test</Link>
                 </form>
             </div>);
     }

@@ -61,8 +61,12 @@ class RequestForm extends Component {
             select: "open",
 
             problem_name: "i.e. finding a bug in Java",
+            hacker_name:"",
             skills: "Java",
-            location: "i.e. building + room number"
+            location: "i.e. building + room number",
+            email: "",
+            hacker_identifier: ""
+
         };
         this.handleChange = this.handleChange.bind(this);
        
@@ -77,10 +81,9 @@ class RequestForm extends Component {
         }
         
     }
-    handleChange(event) {
+    handleChange(evt) {
         this.setState({
-            problem_name: event.target.value,
-            skills:event.target.value
+            [evt.target.name]: evt.target.value
         });
         
     }
@@ -115,6 +118,7 @@ class RequestForm extends Component {
                         <input type="text"
                             value={this.state.problem_name}
                             onChange={this.handleChange}
+                            name="problem_name"
                         ></input>
                     </label>
                     <br />
@@ -128,7 +132,10 @@ class RequestForm extends Component {
                     <h4>Hacker Info</h4>
                     <label for="hacker_name">
                         Name
-                        <input type="text" id="hacker_name"></input>
+                        <input type="text"
+                            value={this.state.hacker_name}
+                            onChange={this.handleChange}
+                            name="hacker_name"></input>
                     </label>
                     
                     <br />
@@ -162,7 +169,10 @@ class RequestForm extends Component {
                         search: "?sort=this.state.problem_name",
                         state: {
                             problem_name: this.state.problem_name,
-                            
+                            hacker_name: this.state.hacker_name,
+                            email: this.state.email,
+                            location: this.state.location,
+                            hacker_identifier: this.state.hacker_identifier
                         }
                     }}>test</Link>
                 </form>

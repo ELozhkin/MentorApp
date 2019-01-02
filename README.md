@@ -18,12 +18,14 @@ TODO:
 		-- login with gmail/facebook
 		-- 'my tickets' - display only the tickets i've already claimed, if any
 - HACKER:
-		-- Request form - finish up api call (currently working on this)
-		-- confirmation before submission
+		-- Request form - finish up api call 
+		-- review page before submitting (currently working on this)
+		-- page with confirmation
 		-- email confirmation sent upon submission
 - BOTH: 
 		--fully integrate api calls/sync to backend
 		-- finalize UI
+		-- chips for skills; material UI
 
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

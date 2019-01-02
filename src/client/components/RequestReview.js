@@ -7,7 +7,10 @@ class Review extends Component {
         super(props);
         this.state = {
             problem_name: props.location.state.problem_name,
-            test: props.location.state
+            hacker_name: props.location.state.hacker_name,
+            location: props.location.state.location,
+            email: props.location.state.email,
+            hacker_identifier: props.location.state.hacker_identifier
         }
         //const { problem_name } = props.location.state;
         this.display = this.display.bind(this);
@@ -20,10 +23,18 @@ class Review extends Component {
         return (
             <div>
                 Request Summary
+                
             <br />
                 {this.state.problem_name}
-            <br />
-                test
+                <br />
+                <h2>My Information</h2>
+                {this.state.hacker_name}
+                <br />
+                {this.state.email}
+                <br />
+                {this.state.location}
+                <br />
+                {this.state.hacker_identifier}
                 <button onClick={this.display}>test</button>
             </div>
             )

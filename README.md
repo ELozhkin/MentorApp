@@ -13,7 +13,17 @@ Main controls routing between the two pages.
 In HACKER view; one component - switcher. Nav is a fixed header on the H_Main page
 and Switcher controls routing between views of the hacker view.
 
-
+TODO:
+- MENTOR: 
+		-- login with gmail/facebook
+		-- 'my tickets' - display only the tickets i've already claimed, if any
+- HACKER:
+		-- Request form - finish up api call (currently working on this)
+		-- confirmation before submission
+		-- email confirmation sent upon submission
+- BOTH: 
+		--fully integrate api calls/sync to backend
+		-- finalize UI
 
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

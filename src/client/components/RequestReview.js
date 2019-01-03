@@ -22,7 +22,8 @@ class Review extends Component {
     render() {
         
         return (
-            <div className="RequestSummary">
+            <div className="Summary">
+                <div className="RequestSummary">
                 <h3>Request Summary</h3>
                 <p>
                     {this.state.problem_name}
@@ -35,10 +36,12 @@ class Review extends Component {
                     <li>{this.state.location}</li>
                     <li>{this.state.slack}</li>
                     <li>{this.state.hacker_identifier}</li>
-                </ul>
+                    </ul>
+                </div>
                 
-                
-                <Link to={{
+                <Link
+                    className="reviewButton editBtn"
+                    to={{
                     pathname: "/Hacker/RequestMentor",
                     state: {
                         problem_name: this.state.problem_name,
@@ -48,7 +51,7 @@ class Review extends Component {
                         hacker_identifier: this.state.hacker_identifier
                     }
                 }}>edit</Link>
-                <button onClick={this.display}>Submit</button>
+                <button onClick={this.display} className="reviewButton">Submit Request</button>
             </div>
             )
     }

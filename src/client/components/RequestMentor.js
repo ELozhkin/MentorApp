@@ -60,35 +60,32 @@ class RequestForm extends Component {
         this.state = {
             select: "open",
 
-            problem_name: "i.e. finding a bug in Java",
+            problem_name: "",
             hacker_name:"",
             skills: "Java",
             location: "i.e. building + room number",
             email: "",
-            hacker_identifier: ""
+            hacker_identifier: "",
+            hacker_slack_name: "",
 
         };
         this.handleChange = this.handleChange.bind(this);
        
-        this.toReview = this.toReview.bind(this);
-
         this.handleSubmit = () => alert("submitted");
 
-        this.handleStatusChange = event => {
-            this.setState({
-                select:event.target.value
-            })
-        }
+        this.handleStatusChange = this.handleStatusChange.bind(this);
         
+    }
+    handleStatusChange(event) {
+        this.setState({
+            select:event.target.value
+        })
     }
     handleChange(evt) {
         this.setState({
             [evt.target.name]: evt.target.value
         });
         
-    }
-    toReview(event) {
-        alert(this.state.problem_name);
     }
     
     render() {
@@ -111,12 +108,12 @@ class RequestForm extends Component {
                         )}
                 </ConfirmChange>*/}
 
-                <form >
+                <form className="RequestForm">
                     <h4>Describe your problem</h4>
                     <label for="problem_name">
                         Problem
                         <input type="text"
-                            value={this.state.problem_name}
+                            defaultValue="i.e. finding a bug in Java"
                             onChange={this.handleChange}
                             name="problem_name"
                         ></input>
@@ -125,6 +122,7 @@ class RequestForm extends Component {
                     <label for="skill">
                         What skills do you need help with?
                         <input type="text"
+                            defaultValue="i.e. Java, Python, UI Design etc."
                             id="skills"
                         ></input>
                     </label>
@@ -141,29 +139,39 @@ class RequestForm extends Component {
                     <br />
                     <label for="email">
                         Email
-                        <input type="text" id="email"></input>
+                        <input type="text"
+                            onChange={this.handleChange}
+                            name="email"></input>
                     </label>
                     
                     <br />
                     <label for="location">
                         Location
-                        <input type="text" id="location"></input>
+                        <input type="text"
+                            defaultValue="Building + room number/area (ex. QNC 1501)"
+                            onChange={this.handleChange}
+                            name="location"></input>
                     </label>
                     
                     <br />
                     <label for="hacker_slack_name">
                         Slack handle (optional)
-                        <input type="text" id="hacker_slack_name"></input>
+                        <input type="text"
+                            defaultValue="@"
+                            onChange={this.handleChange}
+                            name="hacker_slack_name"></input>
                     </label>
                     
                     <br />
                     <label for="hacker_identifier">
                         Identifiers (optional)
-                        <input type="text" id="hacker_identifier"></input>
+                        <input type="text"
+                            defaultValue="i.e. the guy in the bright red jacket!"
+                            onChange={this.handleChange}
+                            name="hacker_identifier"></input>
                     </label>
                     
                     <br />
-                    <button onClick={this.toReview}>Submit</button>
                     <Link to={{
                         pathname: "/Hacker/RequestReview",
                         search: "?sort=this.state.problem_name",
@@ -172,9 +180,12 @@ class RequestForm extends Component {
                             hacker_name: this.state.hacker_name,
                             email: this.state.email,
                             location: this.state.location,
+                            hacker_slack_name: this.state.hacker_slack_name,
                             hacker_identifier: this.state.hacker_identifier
                         }
-                    }}>test</Link>
+                    }}
+                        className="reviewButton"
+                    >Review</Link>
                 </form>
             </div>);
     }
@@ -185,10 +196,9 @@ class Test extends Component {
    
     render() {
         return (
-            <div>
+            <div className="RequestPage">
                 <h2>Request a Mentor</h2>
                 <RequestForm
-                   
                 />
             </div>
         );

@@ -1,5 +1,6 @@
 // JavaScript source code
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 class Review extends Component {
 
@@ -10,9 +11,9 @@ class Review extends Component {
             hacker_name: props.location.state.hacker_name,
             location: props.location.state.location,
             email: props.location.state.email,
+            hacker_slack_name: props.location.state.hacker_slack_name,
             hacker_identifier: props.location.state.hacker_identifier
         }
-        //const { problem_name } = props.location.state;
         this.display = this.display.bind(this);
     }
     display(event) {
@@ -21,21 +22,33 @@ class Review extends Component {
     render() {
         
         return (
-            <div>
-                Request Summary
+            <div className="RequestSummary">
+                <h3>Request Summary</h3>
+                <p>
+                    {this.state.problem_name}
+                </p>
+                skills
+                <h4>My Information</h4>
+                <ul>
+                    <li>{this.state.hacker_name}</li>
+                    <li>{this.state.email}</li>
+                    <li>{this.state.location}</li>
+                    <li>{this.state.slack}</li>
+                    <li>{this.state.hacker_identifier}</li>
+                </ul>
                 
-            <br />
-                {this.state.problem_name}
-                <br />
-                <h2>My Information</h2>
-                {this.state.hacker_name}
-                <br />
-                {this.state.email}
-                <br />
-                {this.state.location}
-                <br />
-                {this.state.hacker_identifier}
-                <button onClick={this.display}>test</button>
+                
+                <Link to={{
+                    pathname: "/Hacker/RequestMentor",
+                    state: {
+                        problem_name: this.state.problem_name,
+                        hacker_name: this.state.hacker_name,
+                        email: this.state.email,
+                        location: this.state.location,
+                        hacker_identifier: this.state.hacker_identifier
+                    }
+                }}>edit</Link>
+                <button onClick={this.display}>Submit</button>
             </div>
             )
     }

@@ -220,3 +220,35 @@
 .claimedRequests .resolveButton {
     background-color: #D1D1D1;
 }
+
+
+
+/*-------------REQUEST FORM; HACKER --------------*/
+.RequestPage {
+    padding: 0 2%;
+}
+.RequestForm input[type=text] {
+    border:none;
+    padding:3%;
+    width:90%;
+    margin-top:10px;
+    font-style:italic;
+    background-color:#e4e4e4;
+    border-radius: 0;
+    -webkit-appearance: none;
+    display:block;
+}
+.RequestForm .reviewButton {
+    width: 30%;
+    margin:0 4% 5% 0;
+    text-align:center;
+    height: 40px;
+    float:right;
+    padding-top:3.5%;
+    border: none;
+    border-radius:200px;
+    background-color: #C4C4C4;
+    color:#fff;
+    text-transform:uppercase;
+    text-decoration:none;
+}

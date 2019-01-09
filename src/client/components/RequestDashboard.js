@@ -1,6 +1,8 @@
-import React, { Component } from 'react';
+import React, { Component, lazy } from 'react';
 import { Switch, Route } from 'react-router-dom';
 
+import { MDCChipSet } from '@material/chips';
+import { Chip, Paper } from '@material-ui/core';
 import ReactDOM from 'react-dom';
 import ReactTable, { ReactTableDefaults } from 'react-table';
 import BootstrapTable from 'react-bootstrap-table-next';
@@ -13,7 +15,8 @@ var store = {
 let data = [
     {
         hacker_name: "John Doe",
-        problem_name: "Python Help",        
+        problem_name: "Python Help",
+        skill: ['Angular', 'Java', 'Python'],
         description: "something extra",
         location: "QNC 1234",
         time_created: {
@@ -117,6 +120,7 @@ class RowItem extends React.Component {
                 <RowContent
                     open={this.state.open}
                     name={this.props.hacker_name}
+                    skill={this.props.skill}
                     email={this.props.email}
                     location={this.props.location}
                     slack={this.props.hacker_slack_name}
@@ -163,6 +167,33 @@ class Form extends React.Component {
 
 
 }
+
+class ChipArray extends React.Component {
+    handleDelete = data => () => {
+        this.setState(state => {
+            const skill = [...this.props.skill];
+            const toDelete = skill.indexOf(data);
+            skill.splice(toDelete, 1);
+            return { skill };
+        })
+    }
+
+   
+    render() {
+        return (
+            <Paper>
+                {this.props.skill.map(data => {
+                    return (
+                        <Chip
+                            label={this.props.skill}
+                            onDelete={this.handleDelete(data)}
+                        />
+                    );
+                })}
+            </Paper>
+        );    
+    }
+}
 {/*RowContent is the content within the collapsible section of the request dashboard
     i.e. shows additional info 
  */}
@@ -185,6 +216,9 @@ class RowContent extends React.Component {
                         <ul className="extraInfo">
                             <li>{this.props.name}</li>
                             <li>{this.props.email}</li>
+                            <ChipArray
+                                skill={this.props.skill}
+                            />
                         </ul>
                         <ul className="extraInfo">
                             <li>{this.props.location}</li>
@@ -297,16 +331,23 @@ class RequestDashboard extends Component {
         window.addEventListener('scroll', this.handleScroll.bind(this));
     }
 
+
     render() {
+
 
         return (
             <div className="container">
+                <div class="mdc-chip">
+                    <i class="material-icons mdc-chip__icon mdc-chip__icon--leading">event</i>
+                    <div class="mdc-chip__text">Add to calendar</div>
+                </div>
                 
                 <Table
                     data={data}
                     columns={cols}
                     headerFixed={this.state.tableHeaderFixed}
                     scrollFn='' />
+
             </div>
             )
     }

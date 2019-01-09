@@ -25,7 +25,7 @@ TODO:
 - BOTH: 
 		--fully integrate api calls/sync to backend
 		-- finalize UI
-		-- chips for skills; material UI
+		-- chips for skills; material UI (Emma)
 
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

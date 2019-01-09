@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@material/chips": "^0.43.0",
     "@reach/dialog": "^0.1.2",
     "react": "^16.6.3",
     "react-bootstrap-table-next": "^1.4.2",

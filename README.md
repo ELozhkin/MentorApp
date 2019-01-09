@@ -16,10 +16,10 @@ and Switcher controls routing between views of the hacker view.
 TODO:
 - MENTOR: 
 		-- login with gmail/facebook
+		-- form with claiming request
 		-- 'my tickets' - display only the tickets i've already claimed, if any
 - HACKER:
 		-- Request form - finish up api call 
-		-- review page before submitting (currently working on this)
 		-- page with confirmation
 		-- email confirmation sent upon submission
 - BOTH: 

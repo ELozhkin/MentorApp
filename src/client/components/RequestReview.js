@@ -11,6 +11,7 @@ class Review extends Component {
             hacker_name: props.location.state.hacker_name,
             location: props.location.state.location,
             email: props.location.state.email,
+            skill:props.location.state.skill,
             hacker_slack_name: props.location.state.hacker_slack_name,
             hacker_identifier: props.location.state.hacker_identifier
         }
@@ -27,8 +28,8 @@ class Review extends Component {
                 <h3>Request Summary</h3>
                 <p>
                     {this.state.problem_name}
-                </p>
-                skills
+                    </p>
+                    {this.state.skill}
                 <h4>My Information</h4>
                 <ul>
                     <li>{this.state.hacker_name}</li>

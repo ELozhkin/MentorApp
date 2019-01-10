@@ -64,8 +64,8 @@ class RequestForm extends Component {
 
             problem_name: "",
             hacker_name:"",
-            skills: "Java",
-            location: "i.e. building + room number",
+            skill: "",
+            location: "",
             email: "",
             hacker_identifier: "",
             hacker_slack_name: "",
@@ -76,6 +76,8 @@ class RequestForm extends Component {
         this.handleSubmit = () => alert("submitted");
 
         this.handleStatusChange = this.handleStatusChange.bind(this);
+
+        this.hi = () => alert(this.state.skill);
         
     }
     handleStatusChange(event) {
@@ -90,13 +92,9 @@ class RequestForm extends Component {
         
     }
 
-    hideText(event) {
-
-    }
- 
-    handleAdd(chip) {
+    handleAdd(skill) {
         this.setState({
-            chips: [...this.state.chips, chip]
+            skill: [...this.state.skill, skill]
         })
     }
 
@@ -107,6 +105,7 @@ class RequestForm extends Component {
 
     }
     
+    
     render() {
         return (
             <div>
@@ -115,7 +114,7 @@ class RequestForm extends Component {
                     <label for="problem_name">
                         Problem
                         <input type="text"
-                            defaultValue="i.e. finding a bug in Java"
+                            placeholder="i.e. finding a bug in Java"
                             onChange={this.handleChange}
                             name="problem_name"
                         ></input>
@@ -126,22 +125,23 @@ class RequestForm extends Component {
                         What skills do you need help with?
                         <br />
                         (i.e. Java, Python, UI Design etc.)
+                        
                         <ChipInput
                             {...this.props}
                             value={this.state.skill}
                             onAdd={(skill) => this.handleAdd(skill)}
                             onDelete={(deletedChip) => this.handleDelete(deletedChip)}
-                            onChange={this.hideText}
                             onBlur={(event) => {
                                 if (this.props.addOnBlur && event.target.value) {
                                     this.handleAdd(event.target.value)
                                 }
                             }}
-
+                            
                             fullWidth
-                           
+                            label=''
                         />
                     </label>
+                    <button onClick={this.hi}>hi</button>
                
 
                     <h4>Hacker Info</h4>
@@ -165,7 +165,7 @@ class RequestForm extends Component {
                     <label for="location">
                         Location
                         <input type="text"
-                            defaultValue="Building + room number/area (ex. QNC 1501)"
+                            placeholder="Building + room number/area (ex. QNC 1501)"
                             onChange={this.handleChange}
                             name="location"></input>
                     </label>
@@ -183,7 +183,7 @@ class RequestForm extends Component {
                     <label for="hacker_identifier">
                         Identifiers (optional)
                         <input type="text"
-                            defaultValue="i.e. the guy in the bright red jacket!"
+                            placeholder="i.e. the guy in the bright red jacket!"
                             onChange={this.handleChange}
                             name="hacker_identifier"></input>
                     </label>
@@ -196,6 +196,7 @@ class RequestForm extends Component {
                         state: {
                             problem_name: this.state.problem_name,
                             hacker_name: this.state.hacker_name,
+                            skill:this.state.skill,
                             email: this.state.email,
                             location: this.state.location,
                             hacker_slack_name: this.state.hacker_slack_name,

@@ -92,13 +92,52 @@ class RequestForm extends Component {
         
     }
 
-    handleAdd(skill) {
-        this.setState({
-            skill: [...this.state.skill, skill]
-        })
-    }
+    //handleAdd(chip) {
+    handleAddChip(chip) {
+            alert("test")
+            if (this.props.onBeforeAdd && !this.props.onBeforeAdd(chip)) {
+                this.setState({ preventChipCreation: true })
+                return false
+            }
+            alert(chip);
+            this.setState({ inputValue: '' })
+            const chips = this.props.value || this.state.skill
+
+            if (this.props.dataSourceConfig) {
+                if (typeof chip === 'string') {
+                    chip = {
+                        [this.props.dataSourceConfig.text]: chip,
+                        [this.props.dataSourceConfig.value]: chip
+                    }
+                }
+
+                if (this.props.allowDuplicates || !chips.some((c) => c[this.props.dataSourceConfig.value] === chip[this.props.dataSourceConfig.value])) {
+                    if (this.props.value && this.props.onAdd) {
+                        this.props.onAdd(chip)
+                    } else {
+                        this.updateChips([...this.state.chips, chip])
+                    }
+                }
+            } else if (chip.trim().length > 0) {
+                if (this.props.allowDuplicates || chips.indexOf(chip) === -1) {
+                    if (this.props.value && this.props.onAdd) {
+                        this.props.onAdd(chip)
+                    } else {
+                        this.updateChips([...this.state.skill, chip])
+                    }
+                }
+            } else {
+                return false
+            }
+            return true
+        }
+        //this.setState({
+        //    skill: [...this.state.skill, skill]
+        //})
+    //}
 
     handleDelete(deletedChip) {
+        alert("test");
         this.setState({
             skill: this.state.skill.filter((c) => c !== deletedChip)
         })
@@ -129,7 +168,7 @@ class RequestForm extends Component {
                         <ChipInput
                             {...this.props}
                             value={this.state.skill}
-                            onAdd={(skill) => this.handleAdd(skill)}
+                            onAdd={(skill) => this.handleAddChip(skill)}
                             onDelete={(deletedChip) => this.handleDelete(deletedChip)}
                             onBlur={(event) => {
                                 if (this.props.addOnBlur && event.target.value) {

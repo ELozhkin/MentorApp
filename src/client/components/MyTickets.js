@@ -129,7 +129,7 @@ class RowItem extends React.Component {
 
 };
 
-{/*Form handles submission form for mentors to claim a request.*/ }
+{/*Form handles submission form for mentors to CLAIM a request.*/ }
 class Form extends React.Component {
     constructor() {
         super();

@@ -3,6 +3,8 @@ import { Switch, Route } from 'react-router-dom';
 
 import { MDCChipSet } from '@material/chips';
 import { Chip, Paper } from '@material-ui/core';
+import ChipInput from 'material-ui-chip-input';
+
 import ReactDOM from 'react-dom';
 import ReactTable, { ReactTableDefaults } from 'react-table';
 import BootstrapTable from 'react-bootstrap-table-next';
@@ -167,39 +169,90 @@ class Form extends React.Component {
 
 
 }
-
+//=================WORKING ON THIS ================
+//==========================================
 class ChipArray extends React.Component {
-    handleDelete = data => () => {
-        this.setState(state => {
-            const skill = [...this.props.skill];
-            const toDelete = skill.indexOf(data);
-            skill.splice(toDelete, 1);
-            return { skill };
+    constructor(props) {
+        super(props);
+        this.state = {
+            skill: this.props.skill
+        }
+        this.handleDelete = this.handleDelete.bind(this);
+
+        
+    };
+    handleDelete(data, event) {
+        const skillNew = [...this.props.skill];
+        const toDelete = skillNew.indexOf(data);
+        skillNew.splice(toDelete, 1);
+        this.setState({
+            skill: skillNew   
         })
-    }
+    };
+    
 
    
     render() {
         return (
-            <Paper>
-                {this.props.skill.map(data => {
-                    return (
-                        <Chip
-                            label={this.props.skill}
-                            onDelete={this.handleDelete(data)}
-                        />
-                    );
-                })}
-            </Paper>
+            <div>
+                <Paper>
+                    {this.state.skill.map(skill => {
+                        return (
+                            <div>
+                                <Chip
+                                    label={skill}
+                                    //ondelete={this.handleDelete(data)}
+                                />
+                            
+                            </div>
+                        
+                        
+                        
+                        );
+                    })}
+                </Paper>
+                <ChipInput
+                    {...this.props}
+                    value={this.props.skill}
+
+                    />
+            </div>
         );    
     }
 }
+
 {/*RowContent is the content within the collapsible section of the request dashboard
     i.e. shows additional info 
  */}
 class RowContent extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            skill: this.props.skill
+        }
+    }
     clicker() {
     }
+
+    onBeforeAdd(chip) {
+        return chip.length >= 3
+    }
+    handleAdd(chip) {
+        this.setState({
+            chips: [...this.state.chips, chip]
+        })
+    }
+
+    handleDelete(deletedChip) {
+        if (deletedChip !== 'react') {
+            this.setState({
+                skill: this.state.skill.filter((c) => c !== deletedChip)
+            })
+        } else {
+            alert('Why would you delete React?')
+        }
+    }
+ 
 
     render() {
         let jsxhtml = (
@@ -216,9 +269,23 @@ class RowContent extends React.Component {
                         <ul className="extraInfo">
                             <li>{this.props.name}</li>
                             <li>{this.props.email}</li>
-                            <ChipArray
-                                skill={this.props.skill}
-                            />
+                            <br/>
+                            <li>
+                                <ChipInput
+                                    {...this.props}
+                                    value={this.state.skill}
+                                    onBeforeAdd={(skill) => this.onBeforeAdd(skill)}
+                                    onAdd={(skill) => this.handleAdd(skill)}
+                                    onDelete={(deletedChip) => this.handleDelete(deletedChip)}
+                                    onBlur={(event) => {
+                                        if (this.props.addOnBlur && event.target.value) {
+                                            this.handleAdd(event.target.value)
+                                        }
+                                    }}
+                                    fullWidth
+                                    label='Some chips with at least three characters'
+                                />
+                            </li>
                         </ul>
                         <ul className="extraInfo">
                             <li>{this.props.location}</li>
@@ -337,11 +404,10 @@ class RequestDashboard extends Component {
 
         return (
             <div className="container">
-                <div class="mdc-chip">
-                    <i class="material-icons mdc-chip__icon mdc-chip__icon--leading">event</i>
-                    <div class="mdc-chip__text">Add to calendar</div>
-                </div>
-                
+                <ChipInput
+                    value={data.skill}
+
+                />
                 <Table
                     data={data}
                     columns={cols}

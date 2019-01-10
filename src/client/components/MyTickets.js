@@ -3,6 +3,10 @@ import { Link } from 'react-router-dom';
 import ReactDOM from 'react-dom';
 import ReactTable, { ReactTableDefaults } from 'react-table';
 import BootstrapTable from 'react-bootstrap-table-next';
+import ChipInput from 'material-ui-chip-input';
+import { Chip, Paper } from '@material-ui/core';
+
+
 
 
 var store = {
@@ -14,6 +18,7 @@ let data = [
         hacker_name: "John Doe",
         problem_name: "Python Help",
         description: "something extra",
+        skill:["Java", "Python", "Ruby"],
         location: "QNC 1234",
         time_created: {
             now: "12:01pm",
@@ -107,16 +112,17 @@ class RowItem extends React.Component {
 
                         {this.props.date}
                         {this.props.time}
+                        <br/>
+                        {this.props.skill}
 
-
-                        <br />
-                        skill
+                        
                     </div>
                 </div>
                 <RowContent
                     open={this.state.open}
                     name={this.props.hacker_name}
                     email={this.props.email}
+                    skill={this.props.skill}
                     location={this.props.location}
                     slack={this.props.hacker_slack_name}
                     details={this.props.details}
@@ -154,6 +160,31 @@ class Form extends React.Component {
     }
 
 
+}
+
+class ChipArray extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            skill: this.props.skill
+        }
+
+    };
+
+    render() {
+        return (
+            <div>
+
+                {this.state.skill.map((skill) => {
+                    return (
+                        <Chip
+                            label={skill}
+                        />
+                    );
+                })}
+            </div>
+        );
+    }
 }
 {/*RowContent is the content within the collapsible section of the request dashboard
     i.e. shows additional info 

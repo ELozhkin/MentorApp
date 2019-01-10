@@ -646,5 +646,6 @@ export const defaultChipRenderer = ({ value, text, isFocused, isDisabled, handle
         onClick={handleClick}
         onDelete={handleDelete}
         label={text}
+        inputRef={text}
     />
 )

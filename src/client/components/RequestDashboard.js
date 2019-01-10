@@ -78,6 +78,30 @@ let cols = [
         label: "Requests"
     }
 ];
+class ChipArray extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            skill:  this.props.skill
+        }
+
+    };
+
+    render() {
+        return (
+            <div>
+                
+                {this.state.skill.map((skill) => {
+                    return (
+                        <Chip
+                            label={skill}
+                        />
+                    );
+                })}
+            </div>
+        );
+    }
+}
 
 {/*RowItem class is refers to each row entry that is visible before drop-down 
  * in the request dashboard.
@@ -87,10 +111,10 @@ let cols = [
     add buttons for skills 
  */}
 class RowItem extends React.Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
-            open: false
+                open: false
         }
     }
     toggleRow(e) {
@@ -105,6 +129,7 @@ class RowItem extends React.Component {
         }
 
         return (
+            <div>
             <li onClick={this.toggleRow.bind(this)} className={classes}>
                 <div className="heading">
                     <div className="col">
@@ -113,12 +138,14 @@ class RowItem extends React.Component {
 
                         {this.props.date}
                         {this.props.time}
+                            <br />
+                            {this.props.skill}
                         
-                        
-                        <br />
-                        skill 
+
                     </div>
+                    
                 </div>
+                
                 <RowContent
                     open={this.state.open}
                     name={this.props.hacker_name}
@@ -130,7 +157,8 @@ class RowItem extends React.Component {
                     notes={this.props.notes}
                 />
                 {this.props.children}
-            </li>
+                </li>
+            </div>
          )
     }
 
@@ -171,55 +199,7 @@ class Form extends React.Component {
 }
 //=================WORKING ON THIS ================
 //==========================================
-class ChipArray extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            skill: this.props.skill
-        }
-        this.handleDelete = this.handleDelete.bind(this);
 
-        
-    };
-    handleDelete(data, event) {
-        const skillNew = [...this.props.skill];
-        const toDelete = skillNew.indexOf(data);
-        skillNew.splice(toDelete, 1);
-        this.setState({
-            skill: skillNew   
-        })
-    };
-    
-
-   
-    render() {
-        return (
-            <div>
-                <Paper>
-                    {this.state.skill.map(skill => {
-                        return (
-                            <div>
-                                <Chip
-                                    label={skill}
-                                    //ondelete={this.handleDelete(data)}
-                                />
-                            
-                            </div>
-                        
-                        
-                        
-                        );
-                    })}
-                </Paper>
-                <ChipInput
-                    {...this.props}
-                    value={this.props.skill}
-
-                    />
-            </div>
-        );    
-    }
-}
 
 {/*RowContent is the content within the collapsible section of the request dashboard
     i.e. shows additional info 
@@ -227,32 +207,10 @@ class ChipArray extends React.Component {
 class RowContent extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            skill: this.props.skill
-        }
+       
     }
     clicker() {
     }
-
-    onBeforeAdd(chip) {
-        return chip.length >= 3
-    }
-    handleAdd(chip) {
-        this.setState({
-            chips: [...this.state.chips, chip]
-        })
-    }
-
-    handleDelete(deletedChip) {
-        if (deletedChip !== 'react') {
-            this.setState({
-                skill: this.state.skill.filter((c) => c !== deletedChip)
-            })
-        } else {
-            alert('Why would you delete React?')
-        }
-    }
- 
 
     render() {
         let jsxhtml = (
@@ -271,19 +229,8 @@ class RowContent extends React.Component {
                             <li>{this.props.email}</li>
                             <br/>
                             <li>
-                                <ChipInput
-                                    {...this.props}
-                                    value={this.state.skill}
-                                    onBeforeAdd={(skill) => this.onBeforeAdd(skill)}
-                                    onAdd={(skill) => this.handleAdd(skill)}
-                                    onDelete={(deletedChip) => this.handleDelete(deletedChip)}
-                                    onBlur={(event) => {
-                                        if (this.props.addOnBlur && event.target.value) {
-                                            this.handleAdd(event.target.value)
-                                        }
-                                    }}
-                                    fullWidth
-                                    label='Some chips with at least three characters'
+                                <ChipArray
+                                    skill={this.props.skill}
                                 />
                             </li>
                         </ul>
@@ -316,8 +263,8 @@ class RowContent extends React.Component {
     includes logic that toggles between open and !open
  */}
 class Table extends React.Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             headerOffset: null,
             headerFixed:true
@@ -404,10 +351,7 @@ class RequestDashboard extends Component {
 
         return (
             <div className="container">
-                <ChipInput
-                    value={data.skill}
-
-                />
+               
                 <Table
                     data={data}
                     columns={cols}

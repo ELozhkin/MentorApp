@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 import { Dialog } from '@reach/dialog';
 import { Link } from 'react-router-dom';
 
+import ChipInput from 'material-ui-chip-input';
+
 
 class ConfirmChange extends Component {
     state = {
@@ -87,27 +89,27 @@ class RequestForm extends Component {
         });
         
     }
+
+    hideText(event) {
+
+    }
+ 
+    handleAdd(chip) {
+        this.setState({
+            chips: [...this.state.chips, chip]
+        })
+    }
+
+    handleDelete(deletedChip) {
+        this.setState({
+            skill: this.state.skill.filter((c) => c !== deletedChip)
+        })
+
+    }
     
     render() {
         return (
             <div>
-                {/*  <ConfirmChange title="Confirm" description="are you sure">
-                    {confirm => (
-                        <form onSubmit={confirm(this.handleSubmit)}>
-                            <label>
-                                <select
-                                    value={this.state.select}
-                                    onChange={confirm(this.handleStatusChange)}
-                                >
-                                    <option value="open">Open</option>
-                                    <option value="close">Close</option>
-                                </select>
-                            </label>
-                            <button>Submit</button>
-                        </form>
-                        )}
-                </ConfirmChange>*/}
-
                 <form className="RequestForm">
                     <h4>Describe your problem</h4>
                     <label for="problem_name">
@@ -119,13 +121,28 @@ class RequestForm extends Component {
                         ></input>
                     </label>
                     <br />
-                    <label for="skill">
+                    <label for="skill"
+                        className="skills">
                         What skills do you need help with?
-                        <input type="text"
-                            defaultValue="i.e. Java, Python, UI Design etc."
-                            id="skills"
-                        ></input>
+                        <br />
+                        (i.e. Java, Python, UI Design etc.)
+                        <ChipInput
+                            {...this.props}
+                            value={this.state.skill}
+                            onAdd={(skill) => this.handleAdd(skill)}
+                            onDelete={(deletedChip) => this.handleDelete(deletedChip)}
+                            onChange={this.hideText}
+                            onBlur={(event) => {
+                                if (this.props.addOnBlur && event.target.value) {
+                                    this.handleAdd(event.target.value)
+                                }
+                            }}
+
+                            fullWidth
+                           
+                        />
                     </label>
+               
 
                     <h4>Hacker Info</h4>
                     <label for="hacker_name">

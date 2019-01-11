@@ -1,5 +1,9 @@
-import React, { Component } from 'react';
+import React, { Component, lazy } from 'react';
 import { Switch, Route } from 'react-router-dom';
+
+import { MDCChipSet } from '@material/chips';
+import { Chip, Paper } from '@material-ui/core';
+import ChipInput from 'material-ui-chip-input';
 
 import ReactDOM from 'react-dom';
 import ReactTable, { ReactTableDefaults } from 'react-table';
@@ -13,7 +17,8 @@ var store = {
 let data = [
     {
         hacker_name: "John Doe",
-        problem_name: "Python Help",        
+        problem_name: "Python Help",
+        skill: ['Angular', 'Java', 'Python'],
         description: "something extra",
         location: "QNC 1234",
         time_created: {
@@ -73,6 +78,30 @@ let cols = [
         label: "Requests"
     }
 ];
+class ChipArray extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            skill:  this.props.skill
+        }
+
+    };
+
+    render() {
+        return (
+            <div>
+                
+                {this.state.skill.map((skill) => {
+                    return (
+                        <Chip
+                            label={skill}
+                        />
+                    );
+                })}
+            </div>
+        );
+    }
+}
 
 {/*RowItem class is refers to each row entry that is visible before drop-down 
  * in the request dashboard.
@@ -82,10 +111,10 @@ let cols = [
     add buttons for skills 
  */}
 class RowItem extends React.Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
-            open: false
+                open: false
         }
     }
     toggleRow(e) {
@@ -100,6 +129,7 @@ class RowItem extends React.Component {
         }
 
         return (
+            <div>
             <li onClick={this.toggleRow.bind(this)} className={classes}>
                 <div className="heading">
                     <div className="col">
@@ -108,15 +138,18 @@ class RowItem extends React.Component {
 
                         {this.props.date}
                         {this.props.time}
+                            <br />
+                            {this.props.skill}
                         
-                        
-                        <br />
-                        skill 
+
                     </div>
+                    
                 </div>
+                
                 <RowContent
                     open={this.state.open}
                     name={this.props.hacker_name}
+                    skill={this.props.skill}
                     email={this.props.email}
                     location={this.props.location}
                     slack={this.props.hacker_slack_name}
@@ -124,7 +157,8 @@ class RowItem extends React.Component {
                     notes={this.props.notes}
                 />
                 {this.props.children}
-            </li>
+                </li>
+            </div>
          )
     }
 
@@ -163,10 +197,18 @@ class Form extends React.Component {
 
 
 }
+//=================WORKING ON THIS ================
+//==========================================
+
+
 {/*RowContent is the content within the collapsible section of the request dashboard
     i.e. shows additional info 
  */}
 class RowContent extends React.Component {
+    constructor(props) {
+        super(props);
+       
+    }
     clicker() {
     }
 
@@ -185,6 +227,12 @@ class RowContent extends React.Component {
                         <ul className="extraInfo">
                             <li>{this.props.name}</li>
                             <li>{this.props.email}</li>
+                            <br/>
+                            <li>
+                                <ChipArray
+                                    skill={this.props.skill}
+                                />
+                            </li>
                         </ul>
                         <ul className="extraInfo">
                             <li>{this.props.location}</li>
@@ -215,8 +263,8 @@ class RowContent extends React.Component {
     includes logic that toggles between open and !open
  */}
 class Table extends React.Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             headerOffset: null,
             headerFixed:true
@@ -297,16 +345,19 @@ class RequestDashboard extends Component {
         window.addEventListener('scroll', this.handleScroll.bind(this));
     }
 
+
     render() {
+
 
         return (
             <div className="container">
-                
+               
                 <Table
                     data={data}
                     columns={cols}
                     headerFixed={this.state.tableHeaderFixed}
                     scrollFn='' />
+
             </div>
             )
     }

@@ -4,8 +4,11 @@
 }
 .test {
     background-color: blue;
-    height: 50px;
+    height: 45px;
     display: block;
+}
+.headerLogo {
+    width:55px;
 }
 /*------------ Request Dashboard -------------------*/
 .mentorNav li{
@@ -180,6 +183,7 @@
     border:none;
     height:25px;
 }
+
 .claimForm label {
     font-family:Lato;
     font-style:normal;
@@ -229,7 +233,6 @@
 }
 .RequestForm input[type=text] {
     border:none;
-
     padding:3%;
     width:90%;
     margin-top:10px;
@@ -238,6 +241,12 @@
     border-radius: 0;
     -webkit-appearance: none;
     display:block;
+}
+.RequestForm .skills input[type=text] {
+    width: 97%;
+    border: none;
+    background:none;
+    height: 25px;
 }
 .reviewButton {
     width: 30%;

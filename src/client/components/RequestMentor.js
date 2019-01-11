@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 import { Dialog } from '@reach/dialog';
 import { Link } from 'react-router-dom';
 
+import ChipInput from 'material-ui-chip-input';
+
 
 class ConfirmChange extends Component {
     state = {
@@ -62,8 +64,8 @@ class RequestForm extends Component {
 
             problem_name: "",
             hacker_name:"",
-            skills: "Java",
-            location: "i.e. building + room number",
+            skill: "",
+            location: "",
             email: "",
             hacker_identifier: "",
             hacker_slack_name: "",
@@ -74,6 +76,8 @@ class RequestForm extends Component {
         this.handleSubmit = () => alert("submitted");
 
         this.handleStatusChange = this.handleStatusChange.bind(this);
+
+        this.hi = () => alert(this.state.skill);
         
     }
     handleStatusChange(event) {
@@ -87,45 +91,96 @@ class RequestForm extends Component {
         });
         
     }
+
+    //handleAdd(chip) {
+    handleAddChip(chip) {
+            alert("test")
+            if (this.props.onBeforeAdd && !this.props.onBeforeAdd(chip)) {
+                this.setState({ preventChipCreation: true })
+                return false
+            }
+            alert(chip);
+            this.setState({ inputValue: '' })
+            const chips = this.props.value || this.state.skill
+
+            if (this.props.dataSourceConfig) {
+                if (typeof chip === 'string') {
+                    chip = {
+                        [this.props.dataSourceConfig.text]: chip,
+                        [this.props.dataSourceConfig.value]: chip
+                    }
+                }
+
+                if (this.props.allowDuplicates || !chips.some((c) => c[this.props.dataSourceConfig.value] === chip[this.props.dataSourceConfig.value])) {
+                    if (this.props.value && this.props.onAdd) {
+                        this.props.onAdd(chip)
+                    } else {
+                        this.updateChips([...this.state.chips, chip])
+                    }
+                }
+            } else if (chip.trim().length > 0) {
+                if (this.props.allowDuplicates || chips.indexOf(chip) === -1) {
+                    if (this.props.value && this.props.onAdd) {
+                        this.props.onAdd(chip)
+                    } else {
+                        this.updateChips([...this.state.skill, chip])
+                    }
+                }
+            } else {
+                return false
+            }
+            return true
+        }
+        //this.setState({
+        //    skill: [...this.state.skill, skill]
+        //})
+    //}
+
+    handleDelete(deletedChip) {
+        this.setState({
+            skill: this.state.skill.filter((c) => c !== deletedChip)
+        })
+
+    }
+    
     
     render() {
         return (
             <div>
-                {/*  <ConfirmChange title="Confirm" description="are you sure">
-                    {confirm => (
-                        <form onSubmit={confirm(this.handleSubmit)}>
-                            <label>
-                                <select
-                                    value={this.state.select}
-                                    onChange={confirm(this.handleStatusChange)}
-                                >
-                                    <option value="open">Open</option>
-                                    <option value="close">Close</option>
-                                </select>
-                            </label>
-                            <button>Submit</button>
-                        </form>
-                        )}
-                </ConfirmChange>*/}
-
                 <form className="RequestForm">
                     <h4>Describe your problem</h4>
                     <label for="problem_name">
                         Problem
                         <input type="text"
-                            defaultValue="i.e. finding a bug in Java"
+                            placeholder="i.e. finding a bug in Java"
                             onChange={this.handleChange}
                             name="problem_name"
                         ></input>
                     </label>
                     <br />
-                    <label for="skill">
+                    <label for="skill"
+                        className="skills">
                         What skills do you need help with?
-                        <input type="text"
-                            defaultValue="i.e. Java, Python, UI Design etc."
-                            id="skills"
-                        ></input>
+                        <br />
+                        (i.e. Java, Python, UI Design etc.)
+                        
+                        <ChipInput
+                            {...this.props}
+                            value={this.state.skill}
+                            onAdd={(skill) => this.handleAddChip(skill)}
+                            onDelete={(deletedChip) => this.handleDelete(deletedChip)}
+                            onBlur={(event) => {
+                                if (this.props.addOnBlur && event.target.value) {
+                                    this.handleAdd(event.target.value)
+                                }
+                            }}
+                            
+                            fullWidth
+                            label=''
+                        />
                     </label>
+                    <button onClick={this.hi}>hi</button>
+               
 
                     <h4>Hacker Info</h4>
                     <label for="hacker_name">
@@ -148,7 +203,7 @@ class RequestForm extends Component {
                     <label for="location">
                         Location
                         <input type="text"
-                            defaultValue="Building + room number/area (ex. QNC 1501)"
+                            placeholder="Building + room number/area (ex. QNC 1501)"
                             onChange={this.handleChange}
                             name="location"></input>
                     </label>
@@ -166,7 +221,7 @@ class RequestForm extends Component {
                     <label for="hacker_identifier">
                         Identifiers (optional)
                         <input type="text"
-                            defaultValue="i.e. the guy in the bright red jacket!"
+                            placeholder="i.e. the guy in the bright red jacket!"
                             onChange={this.handleChange}
                             name="hacker_identifier"></input>
                     </label>
@@ -179,6 +234,7 @@ class RequestForm extends Component {
                         state: {
                             problem_name: this.state.problem_name,
                             hacker_name: this.state.hacker_name,
+                            skill:this.state.skill,
                             email: this.state.email,
                             location: this.state.location,
                             hacker_slack_name: this.state.hacker_slack_name,

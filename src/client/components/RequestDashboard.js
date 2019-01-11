@@ -112,8 +112,20 @@ class RowItem extends React.Component {
         }
     }
     toggleRow(e) {
-        this.setState({ open: !this.state.open });
+        
+            this.setState({
+                open: !this.state.open
+            });
+            console.log('toggleRow, ', this.state.open);
+        
+    }
+    
+    doNothing(e) {
+        this.setState({
+            open: this.state.open
+        });
         console.log('toggleRow, ', this.state.open);
+
     }
 
     render() {
@@ -131,8 +143,9 @@ class RowItem extends React.Component {
 
         return (
             <div>
-            <li onClick={this.toggleRow.bind(this)} className={classes}>
-                <div className="heading">
+            <li className={classes}>
+                    <div className="heading"
+                        onClick={this.toggleRow.bind(this)}>
                     <div className="col">
                         {this.props.problem_name}
                         <br />
@@ -142,7 +155,8 @@ class RowItem extends React.Component {
                     
                 </div>
                 
-                <RowContent
+                    <RowContent
+                        onClick={this.doNothing}
                     open={this.state.open}
                     name={this.props.hacker_name}
                     skill={this.props.skill}
@@ -150,7 +164,7 @@ class RowItem extends React.Component {
                     location={this.props.location}
                     slack={this.props.hacker_slack_name}
                     details={this.props.details}
-                    notes={this.props.notes}
+                        notes={this.props.notes}
                 />
                 {this.props.children}
                 </li>
@@ -169,6 +183,10 @@ class Form extends React.Component {
         }
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this);
+        this.hey = this.hey.bind(this);
+    }
+    hey() {
+        alert("Test");
     }
     handleSubmit(event) {
         event.preventDefault();
@@ -178,21 +196,25 @@ class Form extends React.Component {
             body: data
         });
     }
-    handleChange(evt) {
+    handleChange(evt, event) {
+        
         this.setState({
             [evt.target.name]: evt.target.value
         });
 
     }
+    
 
     render() {
         return (
+            
             <form onSubmit={this.handleSubmit} className="claimForm">
                 <label htmlFor="username">Name
                      <input 
                         name="mentor.identifier.name"
                         type="text"
                         onChange={this.handleChange}
+                        
                     />
                     </label>
                 <br/>
@@ -203,14 +225,14 @@ class Form extends React.Component {
                         name="mentor.slack"
                         type="text"
                         onChange={this.handleChange}
-
                         />
                     </label>
                 <br/>
                 
                 <br />
-                <button>Claim</button>
+                <button onClick={this.hey}>Claim</button>
             </form>
+
         );
     }
 
@@ -260,7 +282,8 @@ class RowContent extends React.Component {
                     <div className=" extraDetails">
                         <p>{this.props.notes}</p>
                         <hr />
-                        <Form/>
+                        <Form
+                        />
                     </div>
                     
                     

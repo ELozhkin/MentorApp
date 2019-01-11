@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import mini_logo from './Mini_logo.png';
 
 class Nav extends Component {
     render() {
         return (
             <header>
-                <h3>SH logo</h3>
+                
+                <img src={mini_logo} className="headerLogo" alt="SH Logo"/>
                 <hr/>
                 <ul class="mentorNav">
                     <li>

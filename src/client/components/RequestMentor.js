@@ -137,7 +137,6 @@ class RequestForm extends Component {
     //}
 
     handleDelete(deletedChip) {
-        alert("test");
         this.setState({
             skill: this.state.skill.filter((c) => c !== deletedChip)
         })

@@ -4,8 +4,11 @@
 }
 .test {
     background-color: blue;
-    height: 50px;
+    height: 45px;
     display: block;
+}
+.headerLogo {
+    width:55px;
 }
 /*------------ Request Dashboard -------------------*/
 .mentorNav li{

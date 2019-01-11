@@ -4,6 +4,7 @@ import { Switch, Route } from 'react-router-dom';
 import RequestMentor from './client/components/RequestMentor';
 import RequestReview from './client/components/RequestReview';
 import Hello from './client/components/hello';
+import mini_logo from './client/components/Mini_logo.png';
 
 class Switcher extends Component {
     render() {
@@ -21,8 +22,7 @@ class HackerMain extends Component {
         return (
             <div>
                 <header>
-                    <h3>SH logo</h3>
-                    <hr />
+                    <img src={mini_logo} className="headerLogo" alt="SH Logo" />
                 </header>
 
                 <Switcher/>

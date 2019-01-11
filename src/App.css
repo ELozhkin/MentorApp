@@ -10,6 +10,13 @@
 .headerLogo {
     width:55px;
 }
+.RequestPage h2, .Summary h2{
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: bold;
+    line-height: normal;
+    font-size: 23px;
+}
 /*------------ Request Dashboard -------------------*/
 .mentorNav li{
     display:inline-block;
@@ -183,6 +190,7 @@
     background:#ffffff;
     border:none;
     height:25px;
+    
 }
 
 .claimForm label {
@@ -232,8 +240,17 @@
 .RequestPage {
     padding: 0 2%;
 }
+.helper {
+    font-style:italic;
+    font-size:12px;
+    color:grey;
+}
+.RequestForm input {
+    border-radius: 5px !important;
+}
 .RequestForm input[type=text] {
     border:none;
+    font-size:14px;
     padding:3%;
     width:90%;
     margin-top:10px;
@@ -251,24 +268,28 @@
 }
 .reviewButton {
     width: 30%;
-    margin:0 4% 5% 0;
-    text-align:center;
+    margin: 0 4% 5% 0;
+    text-align: center;
     height: 40px;
-    float:right;
-    padding-top:2%;
+    float: right;
+    padding-top: 2%;
     border: none;
-    border-radius:200px;
-    background-color: #C4C4C4;
-    color:#fff;
-    text-transform:uppercase;
-    text-decoration:none;
-}
+    border-radius: 200px;
+    color: #fff;
+    text-transform: uppercase;
+    text-decoration: none;
 
+    background-color: #3C56A5;
+    box-shadow:5px 5px #e4e4e4 !important;
+}
+.MuiFormControl-root-18 {
+    width:96% !important;
+}
 /*-------------RequestSummary------------*/
 .RequestSummary {
-    border:1px solid #e4e4e4;
-    padding:3% 5%;
-    margin:2%;
+    border: 1px solid #e4e4e4;
+    padding: 3% 5%;
+    margin: 2%;
 }
 .RequestSummary hr {
     display:none !important;
@@ -292,8 +313,11 @@
     border:1px solid #e4e4e4;
     float:left;
 }
-
+.reviewSkills p{
+    color:red;
+    display:inline-block;
+}
 /*========CHIPS===============*/
 .ChipsMentor {
-    background-color:red !important;
+    background-color: red !important;
 }

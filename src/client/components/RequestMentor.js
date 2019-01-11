@@ -113,8 +113,10 @@ class RequestForm extends Component {
                         What skills do you need help with?
                         <br />
                         (i.e. Java, Python, UI Design etc.)
-                        
+                        <p className="helper">*press enter to add skill</p>
+                        <div className={ChipInput}>
                          <ChipInput
+                            className={ChipInput}
                             {...this.props}
                             value={this.state.skill}
                             onAdd={(chip) => this.handleAddChip(chip)}
@@ -127,7 +129,8 @@ class RequestForm extends Component {
 
                             fullWidth
                             label=''
-                        />
+                            />
+                        </div>
                     </label>
                
 

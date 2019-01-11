@@ -104,16 +104,16 @@ class RowItem extends React.Component {
         }
 
         return (
-            <li onClick={this.toggleRow.bind(this)} className={classes}>
-                <div className="heading">
+            <li  className={classes}>
+                <div className="heading"
+                    onClick={this.toggleRow.bind(this)}>
                     <div className="col">
                         {this.props.problem_name}
                         <br />
 
                         {this.props.date}
                         {this.props.time}
-                        <br/>
-                        {this.props.skill}
+                        
 
                         
                     </div>
@@ -142,12 +142,13 @@ class Form extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
     handleSubmit(event) {
-        event.preventDefault();
-        const data = new FormData(event.target);
-        fetch('/api/url', {
-            method: 'POST',
-            body: data
-        });
+        //event.preventDefault();
+        //const data = new FormData(event.target);
+        //fetch('/api/url', {
+        //    method: 'POST',
+        //    body: data
+        //});
+        alert("yes");
     }
 
     render() {
@@ -206,6 +207,10 @@ class RowContent extends React.Component {
                 <div className="content open" onClick={this.clicker.bind(this)}>
                     <div className="extraInfo">
                         <ul className="extraInfo">
+                            <ChipArray
+                                className="ChipsMentor"
+                                skill={this.props.skill}
+                            />
                             <li>{this.props.name}</li>
                             <li>{this.props.email}</li>
                         </ul>

@@ -1,6 +1,8 @@
 // JavaScript source code
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { Chip, Paper } from '@material-ui/core';
+
 
 class Review extends Component {
 
@@ -21,15 +23,27 @@ class Review extends Component {
         alert(this.state.problem_name);
     }
     render() {
-        
+        const skills = (
+            <div className="reviewSkills">
+                {this.state.skill.map((skill) =>
+                    <Chip
+                        label={skill}
+                    />
+                )}
+
+            </div>
+            
+        );        
+
         return (
             <div className="Summary">
+                <h2>Request a Mentor</h2>
                 <div className="RequestSummary">
                 <h3>Request Summary</h3>
                 <p>
                     {this.state.problem_name}
                     </p>
-                    {this.state.skill}
+                    {skills}
                 <h4>My Information</h4>
                 <ul>
                     <li>{this.state.hacker_name}</li>

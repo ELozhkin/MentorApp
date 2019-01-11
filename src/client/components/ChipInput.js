@@ -316,6 +316,7 @@ class ChipInput extends React.Component {
      * @returns True if the chip was added (or at least `onAdd` was called), false if adding the chip was prevented
      */
     handleAddChip(chip) {
+        alert("yes");
         if (this.props.onBeforeAdd && !this.props.onBeforeAdd(chip)) {
             this.setState({ preventChipCreation: true })
             return false

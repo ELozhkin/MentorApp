@@ -14,7 +14,7 @@ class RequestForm extends Component {
 
             problem_name: "",
             hacker_name:"",
-            skill: "",
+            skill: [],
             location: "",
             email: "",
             hacker_identifier: "",
@@ -26,8 +26,6 @@ class RequestForm extends Component {
         this.handleSubmit = () => alert("submitted");
 
         this.handleStatusChange = this.handleStatusChange.bind(this);
-
-        this.hi = this.hi.bind(this);
         
     }
     handleStatusChange(event) {
@@ -43,12 +41,10 @@ class RequestForm extends Component {
     }
 
     handleAddChip(chip) {
-        alert("test")
         if (this.props.onBeforeAdd && !this.props.onBeforeAdd(chip)) {
             this.setState({ preventChipCreation: true })
             return false
         }
-        alert(chip);
         this.setState({ inputValue: '' })
         const chips = this.props.value || this.state.skill
 
@@ -72,7 +68,9 @@ class RequestForm extends Component {
                 if (this.props.value && this.props.onAdd) {
                     this.props.onAdd(chip)
                 } else {
-                    this.updateChips([...this.state.skill, chip])
+                    this.setState({
+                        skill: [...this.state.skill, chip]
+                    })
                 }
             }
         } else {
@@ -80,11 +78,11 @@ class RequestForm extends Component {
         }
         return true
     }
-       
+
 
     AddChip(chip) {
         this.setState({
-            skill:[...this.state.skill, chip]
+            skill: [...this.state.skill, chip]
         })
     }
 
@@ -95,9 +93,6 @@ class RequestForm extends Component {
 
     }
 
-    hi() {
-        alert("test: ", this.state.skill)
-    }
     
     render() {
         return (
@@ -119,7 +114,7 @@ class RequestForm extends Component {
                         <br />
                         (i.e. Java, Python, UI Design etc.)
                         
-                        <ChipInput
+                         <ChipInput
                             {...this.props}
                             value={this.state.skill}
                             onAdd={(chip) => this.handleAddChip(chip)}
@@ -129,12 +124,11 @@ class RequestForm extends Component {
                                     this.handleAdd(event.target.value)
                                 }
                             }}
-                            
+
                             fullWidth
                             label=''
                         />
                     </label>
-                    <button onClick={this.hi}>hi</button>
                
 
                     <h4>Hacker Info</h4>

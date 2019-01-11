@@ -6,56 +6,6 @@ import { Link } from 'react-router-dom';
 import ChipInput from 'material-ui-chip-input';
 
 
-class ConfirmChange extends Component {
-    state = {
-        open: false,
-        callback: null
-    };
-    show = callback => event => {
-        event.preventDefault();
-        event = {
-            ...event,
-            target: {
-                ...event.target,
-                value: event.target.value
-            }
-        }
-        this.setState({
-            open: true,
-            callback: () => callback(event)
-        })
-    }
-    hide = () => this.setState({
-        open: false,
-        callback:null
-    })
-    confirm = () => {
-        this.state.callback()
-        this.hide()
-    }
-
-    render() {
-        return (
-            <React.Fragment>
-                {this.props.children(this.show)}
-                {this.state.open && (
-                    <Dialog>
-                        <h1>
-                            {this.props.title}
-                        </h1>
-                        <p>
-                            {this.props.description}
-                        </p>
-                        <button onClick={this.hide}>Cancel</button>
-                        <button onClick={this.confirm}>Submit</button>
-                    </Dialog>
-                    )}
-            </React.Fragment>
-            )
-    }
-
-}
-
 class RequestForm extends Component {
     constructor(props) {
         super(props);
@@ -77,7 +27,7 @@ class RequestForm extends Component {
 
         this.handleStatusChange = this.handleStatusChange.bind(this);
 
-        this.hi = () => alert(this.state.skill);
+        this.hi = this.hi.bind(this);
         
     }
     handleStatusChange(event) {
@@ -92,49 +42,51 @@ class RequestForm extends Component {
         
     }
 
-    //handleAdd(chip) {
     handleAddChip(chip) {
-            alert("test")
-            if (this.props.onBeforeAdd && !this.props.onBeforeAdd(chip)) {
-                this.setState({ preventChipCreation: true })
-                return false
-            }
-            alert(chip);
-            this.setState({ inputValue: '' })
-            const chips = this.props.value || this.state.skill
-
-            if (this.props.dataSourceConfig) {
-                if (typeof chip === 'string') {
-                    chip = {
-                        [this.props.dataSourceConfig.text]: chip,
-                        [this.props.dataSourceConfig.value]: chip
-                    }
-                }
-
-                if (this.props.allowDuplicates || !chips.some((c) => c[this.props.dataSourceConfig.value] === chip[this.props.dataSourceConfig.value])) {
-                    if (this.props.value && this.props.onAdd) {
-                        this.props.onAdd(chip)
-                    } else {
-                        this.updateChips([...this.state.chips, chip])
-                    }
-                }
-            } else if (chip.trim().length > 0) {
-                if (this.props.allowDuplicates || chips.indexOf(chip) === -1) {
-                    if (this.props.value && this.props.onAdd) {
-                        this.props.onAdd(chip)
-                    } else {
-                        this.updateChips([...this.state.skill, chip])
-                    }
-                }
-            } else {
-                return false
-            }
-            return true
+        alert("test")
+        if (this.props.onBeforeAdd && !this.props.onBeforeAdd(chip)) {
+            this.setState({ preventChipCreation: true })
+            return false
         }
-        //this.setState({
-        //    skill: [...this.state.skill, skill]
-        //})
-    //}
+        alert(chip);
+        this.setState({ inputValue: '' })
+        const chips = this.props.value || this.state.skill
+
+        if (this.props.dataSourceConfig) {
+            if (typeof chip === 'string') {
+                chip = {
+                    [this.props.dataSourceConfig.text]: chip,
+                    [this.props.dataSourceConfig.value]: chip
+                }
+            }
+
+            if (this.props.allowDuplicates || !chips.some((c) => c[this.props.dataSourceConfig.value] === chip[this.props.dataSourceConfig.value])) {
+                if (this.props.value && this.props.onAdd) {
+                    this.props.onAdd(chip)
+                } else {
+                    this.updateChips([...this.state.chips, chip])
+                }
+            }
+        } else if (chip.trim().length > 0) {
+            if (this.props.allowDuplicates || chips.indexOf(chip) === -1) {
+                if (this.props.value && this.props.onAdd) {
+                    this.props.onAdd(chip)
+                } else {
+                    this.updateChips([...this.state.skill, chip])
+                }
+            }
+        } else {
+            return false
+        }
+        return true
+    }
+       
+
+    AddChip(chip) {
+        this.setState({
+            skill:[...this.state.skill, chip]
+        })
+    }
 
     handleDelete(deletedChip) {
         this.setState({
@@ -142,7 +94,10 @@ class RequestForm extends Component {
         })
 
     }
-    
+
+    hi() {
+        alert("test: ", this.state.skill)
+    }
     
     render() {
         return (
@@ -167,7 +122,7 @@ class RequestForm extends Component {
                         <ChipInput
                             {...this.props}
                             value={this.state.skill}
-                            onAdd={(skill) => this.handleAddChip(skill)}
+                            onAdd={(chip) => this.handleAddChip(chip)}
                             onDelete={(deletedChip) => this.handleDelete(deletedChip)}
                             onBlur={(event) => {
                                 if (this.props.addOnBlur && event.target.value) {

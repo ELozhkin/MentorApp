@@ -65,12 +65,6 @@ let data = [
         details: "details 5",
         state: "live"
     },
-    {
-        id: 6,
-        name: "name 6",
-        details: "details 6",
-        state: "live"
-    }
 ];
 
 let cols = [
@@ -86,18 +80,19 @@ class ChipArray extends React.Component {
         }
 
     };
-
     render() {
+        const content = (
+            <div>
+                {this.state.skill.map((skill) =>
+                    <Chip
+                        label={skill}
+                    />
+                    )}
+            </div>
+         );
         return (
             <div>
-                
-                {this.state.skill.map((skill) => {
-                    return (
-                        <Chip
-                            label={skill}
-                        />
-                    );
-                })}
+                {content}
             </div>
         );
     }
@@ -106,15 +101,14 @@ class ChipArray extends React.Component {
 {/*RowItem class is refers to each row entry that is visible before drop-down 
  * in the request dashboard.
     
-    TODO:
-    Fix display within return section.
-    add buttons for skills 
+    
  */}
 class RowItem extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-                open: false
+            open: false,
+            skill: this.props.skill
         }
     }
     toggleRow(e) {
@@ -127,6 +121,13 @@ class RowItem extends React.Component {
         if (this.state.open) {
             classes = 'open';
         }
+        
+        const content = (
+            <div>
+                {this.state.skill}
+                
+            </div>
+        );
 
         return (
             <div>
@@ -135,12 +136,7 @@ class RowItem extends React.Component {
                     <div className="col">
                         {this.props.problem_name}
                         <br />
-
-                        {this.props.date}
-                        {this.props.time}
-                            <br />
-                            {this.props.skill}
-                        
+                            {this.props.date} - {this.props.time}
 
                     </div>
                     
@@ -168,7 +164,11 @@ class RowItem extends React.Component {
 class Form extends React.Component {
     constructor(){
         super();
+        this.state = {
+            open:true
+        }
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleChange = this.handleChange.bind(this);
     }
     handleSubmit(event) {
         event.preventDefault();
@@ -178,17 +178,36 @@ class Form extends React.Component {
             body: data
         });
     }
+    handleChange(evt) {
+        this.setState({
+            [evt.target.name]: evt.target.value
+        });
+
+    }
 
     render() {
         return (
             <form onSubmit={this.handleSubmit} className="claimForm">
-                <label htmlFor="username">Name</label>
+                <label htmlFor="username">Name
+                     <input 
+                        name="mentor.identifier.name"
+                        type="text"
+                        onChange={this.handleChange}
+                    />
+                    </label>
                 <br/>
-                <input id="mentor.identifier.name" name="username" type="text" />
+               
                 <br/>
-                <label htmlFor="email">Slack Handle</label>
+                <label htmlFor="email">Slack Handle
+                    <input id="mentor.identifier.slack"
+                        name="mentor.slack"
+                        type="text"
+                        onChange={this.handleChange}
+
+                        />
+                    </label>
                 <br/>
-                <input id="mentor.identifier.slack" name="mentor.slack" type="text" />
+                
                 <br />
                 <button>Claim</button>
             </form>
@@ -197,9 +216,6 @@ class Form extends React.Component {
 
 
 }
-//=================WORKING ON THIS ================
-//==========================================
-
 
 {/*RowContent is the content within the collapsible section of the request dashboard
     i.e. shows additional info 
@@ -225,14 +241,16 @@ class RowContent extends React.Component {
                 <div className="content open" onClick={this.clicker.bind(this)}>
                     <div className="extraInfo">
                         <ul className="extraInfo">
-                            <li>{this.props.name}</li>
-                            <li>{this.props.email}</li>
-                            <br/>
-                            <li>
-                                <ChipArray
+                            
+                            <ChipArray
+                                className="ChipsMentor"
                                     skill={this.props.skill}
                                 />
-                            </li>
+                            <br/>
+                            <li>{this.props.name}</li>
+                            <li>{this.props.email}</li>
+                            
+                            
                         </ul>
                         <ul className="extraInfo">
                             <li>{this.props.location}</li>

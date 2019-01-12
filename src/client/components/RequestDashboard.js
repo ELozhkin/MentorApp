@@ -9,6 +9,8 @@ import ReactDOM from 'react-dom';
 import ReactTable, { ReactTableDefaults } from 'react-table';
 import BootstrapTable from 'react-bootstrap-table-next';
 
+const axios = require('axios');
+
 
 var store = {
     headerOffset: null
@@ -312,19 +314,27 @@ class Table extends React.Component {
         }
     }
 
+    componentWillMount() {
+        this.getData();
+    }
+
     componentDidMount() {
-        console.log('reactDom: ', ReactDOM.findDOMNode(this.refs.header));
+        // console.log('reactDom: ', ReactDOM.findDOMNode(this.refs.header));
         store.headerOffset = ReactDOM.findDOMNode(this.refs.header).getBoundingClientRect().top;
-        console.log('store:', store.headerOffset);
+        // console.log('store:', store.headerOffset);
     }
     render() {
         let columns = this.props.columns.map((item, inx) => {
             return (<HeaderColumn label={item.label} />);
         });
 
-        let rows = this.props.data.map((item, inx) => {
-            return (<RowItem{...item}></RowItem>);
-        });
+        let rows;
+
+        if (this.state.data) {
+            rows = this.state.data.map((item, inx) => {
+                return (<RowItem{...item}></RowItem>);
+            });
+        }
         let classes = 'header';
         if (this.props.headerFixed) {
             classes = 'header fixed';
@@ -339,6 +349,18 @@ class Table extends React.Component {
                     {rows}
                 </ul>
             </div>);
+    }
+
+    getData() {
+        axios
+            .get('http://localhost:3000/request/query')
+            .then((res) => {
+                this.setState({data : res['data']['requests']});
+            })
+            .catch((e) => {
+                alert('Something went wrong. Please try again later')
+                this.setState({data : {}});
+            });
     }
 
 }

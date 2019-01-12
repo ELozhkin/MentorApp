@@ -1,9 +1,12 @@
 // JavaScript source code
-import React, { Component } from 'react';   
+import React, { Component } from 'react';
 import { Dialog } from '@reach/dialog';
 import { Link } from 'react-router-dom';
 
 import ChipInput from 'material-ui-chip-input';
+
+const uuidv1 = require('uuid/v1');
+const axios = require('axios');
 
 
 class RequestForm extends Component {
@@ -19,14 +22,15 @@ class RequestForm extends Component {
             email: "",
             hacker_identifier: "",
             hacker_slack_name: "",
-
+            jwt: ""
         };
         this.handleChange = this.handleChange.bind(this);
        
         this.handleSubmit = () => alert("submitted");
 
         this.handleStatusChange = this.handleStatusChange.bind(this);
-        
+        this.handleOnBlur = this.handleOnBlur.bind(this);
+
     }
     handleStatusChange(event) {
         this.setState({
@@ -37,7 +41,13 @@ class RequestForm extends Component {
         this.setState({
             [evt.target.name]: evt.target.value
         });
-        
+
+    }
+
+    handleOnBlur(evt) {
+        if (evt.target.name === 'email') {
+            this.grabJwt(evt.target.value, this);
+        }
     }
 
     handleAddChip(chip) {
@@ -78,6 +88,26 @@ class RequestForm extends Component {
         }
         return true
     }
+
+    grabJwt = (email, currentThis) => {
+        axios
+            .get(
+                `http://localhost:3000/request/generate_token?email=${email}&uuid=${uuidv1()}`
+            )
+            .then((res) => {
+                console.log(res.data.token);
+                let jwt = res.data.token;
+                if (jwt) {
+                    currentThis.setState({
+                        jwt: jwt
+                    });
+                }
+            })
+            .catch((e) => {
+                console.log(e);
+                return false;
+            });
+    };
 
 
     AddChip(chip) {
@@ -148,6 +178,7 @@ class RequestForm extends Component {
                         Email
                         <input type="text"
                             onChange={this.handleChange}
+                            onBlur={this.handleOnBlur}
                             name="email"></input>
                     </label>
                     
@@ -190,7 +221,8 @@ class RequestForm extends Component {
                             email: this.state.email,
                             location: this.state.location,
                             hacker_slack_name: this.state.hacker_slack_name,
-                            hacker_identifier: this.state.hacker_identifier
+                            hacker_identifier: this.state.hacker_identifier,
+                            jwt: this.state.jwt
                         }
                     }}
                         className="reviewButton"

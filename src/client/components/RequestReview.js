@@ -1,8 +1,9 @@
 // JavaScript source code
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { Chip, Paper } from '@material-ui/core';
 
+const axios = require('axios');
 
 class Review extends Component {
 
@@ -15,14 +16,35 @@ class Review extends Component {
             email: props.location.state.email,
             skill:props.location.state.skill,
             hacker_slack_name: props.location.state.hacker_slack_name,
-            hacker_identifier: props.location.state.hacker_identifier
+            hacker_identifier: props.location.state.hacker_identifier,
+            jwt: props.location.state.jwt
         }
         this.display = this.display.bind(this);
     }
     display(event) {
-        alert(this.state.problem_name);
+        axios
+            .put('http://localhost:3000/request/create', this.state, {
+                headers: { authorization: this.state.jwt }
+            })
+            .then((res) => {
+                alert('Successfully submitted! Someone will be by to help you')
+                this.setState({
+                    loading: false,
+                    success: true
+                });
+            })
+            .catch((e) => {
+                alert('Validation error. Please review all details and try again')
+                this.setState({
+                    loading: false,
+                    success: false
+                });
+            });
     }
     render() {
+        if (this.state.success === true) {
+            return <Redirect to='/Hacker/RequestMentor' />
+        }
         const skills = (
             <div className="reviewSkills">
                 {this.state.skill.map((skill) =>

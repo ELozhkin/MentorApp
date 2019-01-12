@@ -285,6 +285,9 @@
 .MuiFormControl-root-18 {
     width:96% !important;
 }
+.MuiChip-root-1 {
+    margin: 0 5px !important;
+}
 /*-------------RequestSummary------------*/
 .RequestSummary {
     border: 1px solid #e4e4e4;
@@ -320,4 +323,5 @@
 /*========CHIPS===============*/
 .ChipsMentor {
     background-color: red !important;
+
 }
